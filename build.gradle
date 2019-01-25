@@ -6,12 +6,13 @@ buildscript {
         kotlinCoroutines = '1.1.0'
         dokka = '0.9.17'
 
-        // Build
         appApplicationId = "ca.hoogit.whalesay"
         applicationVersionCode = 1
         applicationVersionName = "1.0.0"
         androidTargetSdkVersion = 28
         androidMinimumSdkVersion = 21
+        suffixDebug = "dev"
+        suffixBeta = "beta"
 
         // Architecture
         archLifecycle = '2.0.0'

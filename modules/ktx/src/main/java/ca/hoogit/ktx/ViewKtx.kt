@@ -1,7 +1,11 @@
 package ca.hoogit.ktx
 
+import android.animation.TimeInterpolator
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewPropertyAnimator
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import androidx.annotation.Px
 import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
@@ -68,4 +72,41 @@ fun View.onLayoutChange(block: (View) -> Unit) {
     addOnLayoutChangeListener { v, _, _, _, _, _, _, _, _ ->
         block(v)
     }
+}
+
+fun View.animateYDecelerate(to: Float, duration: Long? = null, factor: Float = 2f) =
+    animateY(to, DecelerateInterpolator(factor), duration)
+
+fun View.animateYAccelerate(to: Float, duration: Long? = null, factor: Float = 2f) =
+    animateY(to, AccelerateInterpolator(factor), duration)
+
+fun View.animateYtoZero(interpolator: TimeInterpolator? = null, duration: Long? = null) {
+    animateY(0f, interpolator, duration)
+}
+
+fun View.animateY(to: Float, interpolator: TimeInterpolator? = null, duration: Long? = null) {
+    animate(interpolator, duration) { translationY(to) }
+}
+
+fun View.animateXtoZero(interpolator: TimeInterpolator? = null, duration: Long? = null) {
+    animateX(0f, interpolator, duration)
+}
+
+fun View.animateX(to: Float = 0f, interpolator: TimeInterpolator? = null, duration: Long? = null) {
+    animate(interpolator, duration) { translationX(to) }
+}
+
+// TODO - Have this return the animator so that we can stop/cancel/cleanup
+private fun View.animate(
+    interpolator: TimeInterpolator? = null,
+    duration: Long?,
+    block: ViewPropertyAnimator.() -> Unit
+) {
+    animate()
+        .setInterpolator(interpolator)
+        .apply {
+            if (duration != null) setDuration(duration)
+            this.apply(block)
+        }
+        .start()
 }

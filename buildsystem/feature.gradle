@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion androidTargetSdkVersion
@@ -19,7 +20,7 @@ android {
 
     buildTypes {
         debug {
-            debuggable true
+            versionNameSuffix "-$suffixDebug"
         }
         release {
             minifyEnabled false
@@ -27,6 +28,8 @@ android {
         }
         beta {
             initWith release
+
+            versionNameSuffix "-$suffixBeta"
 
             matchingFallbacks = ['debug']
         }

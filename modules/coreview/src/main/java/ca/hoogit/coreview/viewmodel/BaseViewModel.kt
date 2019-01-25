@@ -10,7 +10,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class BaseViewModel : ViewModel(), CoroutineScope {
+open class BaseViewModel : ViewModel(), CoroutineScope {
 
     protected val parentJob = SupervisorJob()
 

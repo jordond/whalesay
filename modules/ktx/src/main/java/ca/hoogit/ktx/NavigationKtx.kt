@@ -2,7 +2,10 @@ package ca.hoogit.ktx
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavArgs
+import androidx.navigation.NavArgsLazy
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -10,6 +13,13 @@ import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import ca.hoogit.ktx.util.NavigateOptions
+
+@MainThread
+inline fun <reified Args : NavArgs> Fragment.navArgs() = NavArgsLazy(Args::class) {
+    arguments
+        ?: activity?.intent?.extras
+        ?: throw IllegalStateException("Fragment $this has null arguments")
+}
 
 /**
  * Quick extension to grab a nullable [NavController]

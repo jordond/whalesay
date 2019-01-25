@@ -1,13 +1,11 @@
 package ca.hoogit.whalesay.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import ca.hoogit.whalesay.R
+import ca.hoogit.coreview.activity.BaseActivity
+import ca.hoogit.coreview.viewmodel.getViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+    override fun getLayoutRes(): Int = TODO()
+
+    private val viewModel by lazy { getViewModel<MainViewModel>() }
 }

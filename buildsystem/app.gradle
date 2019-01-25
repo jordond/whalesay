@@ -22,8 +22,8 @@ android {
 
     buildTypes {
         debug {
-            versionNameSuffix '-dev'
-            applicationIdSuffix ".dev"
+            versionNameSuffix "-$suffixDebug"
+            applicationIdSuffix ".$suffixDebug"
             debuggable true
         }
         release {
@@ -32,8 +32,8 @@ android {
         }
         beta {
             initWith release
-            versionNameSuffix '-beta'
-            applicationIdSuffix ".beta"
+            versionNameSuffix "-$suffixBeta"
+            applicationIdSuffix ".$suffixBeta"
 
             matchingFallbacks = ['debug']
         }
@@ -43,5 +43,8 @@ android {
             // Increase the number of errors to show, stops Data-binding errors from hiding errors
             option("-Xmaxerrs", 500)
         }
+    }
+    dataBinding {
+        enabled = true
     }
 }

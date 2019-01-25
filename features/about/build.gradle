@@ -1,13 +1,10 @@
-apply from: "${rootDir}/buildsystem/app.gradle"
+apply from: "${rootDir}/buildsystem/feature.gradle"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':modules:core')
-    implementation project(path: ':modules:coreview')
-    implementation project(path: ':modules:ktx')
-
-    /* Features */
-    implementation project(path: ':features:about')
+    implementation project(":modules:core")
+    implementation project(":modules:coreview")
+    implementation project(":modules:ktx")
 
     /* Kotlin */
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
@@ -48,9 +45,6 @@ dependencies {
 
     /* Debug Utils */
     implementation "com.jakewharton.timber:timber:$debugTimber"
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$debugLeakCanary"
-    debugImplementation "com.facebook.stetho:stetho:$debugStetho"
-    debugImplementation "com.facebook.stetho:stetho-okhttp3:$debugStetho"
 
     /* Testing */
     testImplementation "junit:junit:$testJunit"
