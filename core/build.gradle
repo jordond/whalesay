@@ -1,18 +1,16 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
+
     defaultConfig {
-        applicationId "ca.hoogit.whalesay"
-        minSdkVersion 21
-        targetSdkVersion 28
         versionCode 1
-        versionName "1.0-dev"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -58,6 +56,11 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$diDagger"
     kapt "com.google.dagger:dagger-compiler:$diDagger"
     kapt "com.google.dagger:dagger-android-processor:$diDagger"
+
+    /* Network */
+    implementation "com.squareup.retrofit2:retrofit:$networkRetrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$networkRetrofit"
+    implementation "com.squareup.okhttp3:okhttp:$networkOkhttp"
 
     /* UI */
     implementation "com.xwray:groupie:$uiGroupie"

@@ -21,6 +21,7 @@ buildscript {
         // Ktx
         ktxCore = '1.0.1'
         ktxLiveData = '2.0.1'
+        ktxLives = '1.2.1'
         ktxTimber = '1.5.1'
 
         // Dependency Injection
