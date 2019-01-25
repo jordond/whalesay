@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion androidTargetSdkVersion
@@ -39,14 +38,48 @@ android {
         experimental = true
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     kapt {
         javacOptions {
             // Increase the number of errors to show, stops Data-binding errors from hiding errors
             option("-Xmaxerrs", 500)
         }
     }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /* Kotlin */
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines"
+
+    /* Architecture components */
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycle"
+
+    /* Ktx */
+    implementation "com.github.ajalt:timberkt:$ktxTimber"
+
+    /* Dependency Injection */
+    implementation "com.google.dagger:dagger:$diDagger"
+    implementation "com.google.dagger:dagger-android:$diDagger"
+    implementation "com.google.dagger:dagger-android-support:$diDagger"
+    kapt "com.google.dagger:dagger-compiler:$diDagger"
+    kapt "com.google.dagger:dagger-android-processor:$diDagger"
+
+    /* Network */
+    implementation "com.squareup.retrofit2:retrofit:$networkRetrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$networkRetrofit"
+    implementation "com.squareup.okhttp3:okhttp:$networkOkhttp"
+
+    /* Misc */
+    implementation "joda-time:joda-time:$miscJodaTime"
+
+    /* Debug Utils */
+    implementation "com.jakewharton.timber:timber:$debugTimber"
+
+    /* Testing */
+    testImplementation "junit:junit:$testJunit"
+    testImplementation "io.mockk:mockk:$testMockk"
+    testImplementation "com.willowtreeapps.assertk:assertk:$testAssertK"
 }
