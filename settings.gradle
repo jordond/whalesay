@@ -1,1 +1,1 @@
-include ':app', ':core'
+include ':mobile', ':modules:core', ':modules:coreview', ':modules:ktx'

@@ -8,8 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/mobile" />
+            <option value="$PROJECT_DIR$/modules" />
+            <option value="$PROJECT_DIR$/modules/core" />
+            <option value="$PROJECT_DIR$/modules/coreview" />
+            <option value="$PROJECT_DIR$/modules/ktx" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

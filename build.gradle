@@ -6,6 +6,13 @@ buildscript {
         kotlinCoroutines = '1.1.0'
         dokka = '0.9.17'
 
+        // Build
+        appApplicationId = "ca.hoogit.whalesay"
+        applicationVersionCode = 1
+        applicationVersionName = "1.0.0"
+        androidTargetSdkVersion = 28
+        androidMinimumSdkVersion = 21
+
         // Architecture
         archLifecycle = '2.0.0'
         archNavigation = '1.0.0-alpha11'
@@ -25,7 +32,7 @@ buildscript {
         ktxTimber = '1.5.1'
 
         // Dependency Injection
-        diDagger = '2.17' // TODO stuck on 2.16 until jetifier is fixed
+        diDagger = '2.16' // TODO stuck on 2.16 until jetifier is fixed
         // https://github.com/google/dagger/issues/1245#issuecomment-431842933
 
         // Shared Preferences

@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs"
+
+android {
+    compileSdkVersion androidTargetSdkVersion
+
+    defaultConfig {
+        applicationId appApplicationId
+
+        minSdkVersion androidMinimumSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+
+        versionCode applicationVersionCode
+        versionName applicationVersionName
+
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            versionNameSuffix '-dev'
+            applicationIdSuffix ".dev"
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        beta {
+            initWith release
+            versionNameSuffix '-beta'
+            applicationIdSuffix ".beta"
+
+            matchingFallbacks = ['debug']
+        }
+    }
+    kapt {
+        javacOptions {
+            // Increase the number of errors to show, stops Data-binding errors from hiding errors
+            option("-Xmaxerrs", 500)
+        }
+    }
+}

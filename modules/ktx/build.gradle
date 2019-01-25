@@ -1,0 +1,63 @@
+apply from: "${rootDir}/buildsystem/feature.gradle"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /* Kotlin */
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines"
+
+    /* Architecture components */
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycle"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$archNavigation"
+    implementation "android.arch.navigation:navigation-ui-ktx:$archNavigation"
+
+    /* Android libraries */
+    implementation "androidx.constraintlayout:constraintlayout:$androidConstraintLayout"
+    implementation "androidx.legacy:legacy-support-v4:$androidLegacy"
+    implementation "androidx.appcompat:appcompat:$androidAppcompat"
+    implementation "com.google.android.material:material:$androidMaterial"
+
+    /* Ktx */
+    implementation "androidx.core:core-ktx:$ktxCore"
+    implementation "com.shopify:livedata-ktx:$ktxLiveData"
+    implementation "com.snakydesign.livedataextensions:lives:$ktxLives"
+    implementation "com.github.ajalt:timberkt:$ktxTimber"
+
+    /* Dependency Injection */
+    implementation "com.google.dagger:dagger:$diDagger"
+    implementation "com.google.dagger:dagger-android:$diDagger"
+    implementation "com.google.dagger:dagger-android-support:$diDagger"
+    kapt "com.google.dagger:dagger-compiler:$diDagger"
+    kapt "com.google.dagger:dagger-android-processor:$diDagger"
+
+    /* Network */
+    implementation "com.squareup.retrofit2:retrofit:$networkRetrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$networkRetrofit"
+    implementation "com.squareup.okhttp3:okhttp:$networkOkhttp"
+
+    /* UI */
+    implementation "com.xwray:groupie:$uiGroupie"
+    implementation "com.xwray:groupie-databinding:$uiGroupie"
+    implementation "com.xwray:groupie-kotlin-android-extensions:$uiGroupie"
+
+    /* Misc */
+    implementation "com.github.quickpermissions:quickpermissions-kotlin:$miscQuickPermissions"
+
+    /* Debug Utils */
+    implementation "com.jakewharton.timber:timber:$debugTimber"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$debugLeakCanary"
+    debugImplementation "com.facebook.stetho:stetho:$debugStetho"
+    debugImplementation "com.facebook.stetho:stetho-okhttp3:$debugStetho"
+
+    /* Testing */
+    testImplementation "junit:junit:$testJunit"
+    testImplementation "androidx.arch.core:core-testing:$testAndroidArch"
+    testImplementation "io.mockk:mockk:$testMockk"
+    testImplementation "com.willowtreeapps.assertk:assertk:$testAssertK"
+    testImplementation "org.robolectric:robolectric:$testRobolectric"
+    androidTestImplementation "androidx.test:runner:$testAndroidRunner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$testEspresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$testEspresso"
+}

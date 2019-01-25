@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion androidTargetSdkVersion
+
+    defaultConfig {
+        minSdkVersion androidMinimumSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+
+        versionCode applicationVersionCode
+        versionName applicationVersionName
+
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        beta {
+            initWith release
+
+            matchingFallbacks = ['debug']
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    kapt {
+        javacOptions {
+            // Increase the number of errors to show, stops Data-binding errors from hiding errors
+            option("-Xmaxerrs", 500)
+        }
+    }
+}
