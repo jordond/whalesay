@@ -7,10 +7,12 @@ import android.view.ViewPropertyAnimator
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.annotation.Px
+import androidx.annotation.StringRes
 import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
 import androidx.core.view.marginRight
 import androidx.core.view.marginTop
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
 fun View.setMarginTop(margin: Int) {
@@ -40,6 +42,14 @@ fun <T : View> View.onClickTyped(listener: (T) -> Unit) {
     this.setOnClickListener {
         (this as? T)?.let { view -> listener(view) }
     }
+}
+
+fun View.showMessage(@StringRes resID: Int, duration: Int = Snackbar.LENGTH_LONG) {
+    Snackbar.make(this, resID, duration).show()
+}
+
+fun View.showMessage(message: String, duration: Int = Snackbar.LENGTH_LONG) {
+    Snackbar.make(this, message, duration).show()
 }
 
 fun View.hideKeyboard() {

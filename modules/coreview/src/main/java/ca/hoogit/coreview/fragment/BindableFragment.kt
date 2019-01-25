@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import ca.hoogit.coreview.viewmodel.BindableViewModel
 
 abstract class BindableFragment<T : ViewDataBinding> : BaseFragment() {
 
@@ -21,10 +20,7 @@ abstract class BindableFragment<T : ViewDataBinding> : BaseFragment() {
 
         bindData()
 
-        if (this is BindableViewModel) {
-            bindViewModel()
-            binding.setLifecycleOwner(owner)
-        }
+        binding.setLifecycleOwner(owner)
 
         return binding.root
     }

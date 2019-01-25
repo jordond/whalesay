@@ -26,6 +26,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$networkRetrofit"
     implementation "com.squareup.okhttp3:okhttp:$networkOkhttp"
 
+    /* Misc */
+    implementation "joda-time:joda-time:$miscJodaTime"
+
     /* Debug Utils */
     implementation "com.jakewharton.timber:timber:$debugTimber"
 

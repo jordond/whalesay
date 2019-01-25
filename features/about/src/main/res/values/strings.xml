@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">about</string>
+    <string name="author_with_year">Jordon de Hoog, %s</string>
+    <string name="view_source">View source</string>
+    <string name="share_the_app">Share with humans</string>
+    <string name="rate_on_play_store">Rate on Play store</string>
+    <string name="view_website">View Website</string>
+    <string name="app_id">App ID: %s</string>
+    <string name="build_date">Build Date: %s</string>
+    <string name="git_info">%s@%s</string>
 </resources>

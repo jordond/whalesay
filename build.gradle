@@ -19,6 +19,7 @@ buildscript {
         archNavigation = '1.0.0-alpha11'
 
         // Android
+        androidCustomTabs = '28.0.0'
         androidConstraintLayout = '2.0.0-alpha2'
         androidLegacy = '1.0.0'
         androidAppcompat = '1.0.2'
@@ -49,9 +50,11 @@ buildscript {
 
         // UI
         uiGroupie = '2.3.0'
+        uiEiffel = 'master-SNAPSHOT'
 
         // Misc
         miscQuickPermissions = '0.4.0'
+        miscJodaTime = '2.10.1'
 
         // Debug Utils
         debugTimber = '4.7.1'

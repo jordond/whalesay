@@ -1,5 +1,13 @@
 apply from: "${rootDir}/buildsystem/feature.gradle"
 
+android {
+    defaultConfig {
+        buildConfigField "long", "BUILD_DATE", System.currentTimeMillis() + "L"
+        buildConfigField "String", "GIT_HASH", "\"${getGitHash()}\""
+        buildConfigField "String", "GIT_BRANCH", "\"${getWorkingBranch()}\""
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":modules:core")
@@ -17,6 +25,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$archNavigation"
 
     /* Android libraries */
+    implementation "com.android.support:customtabs:$androidCustomTabs"
     implementation "androidx.constraintlayout:constraintlayout:$androidConstraintLayout"
     implementation "androidx.legacy:legacy-support-v4:$androidLegacy"
     implementation "androidx.appcompat:appcompat:$androidAppcompat"
@@ -36,11 +45,10 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$diDagger"
 
     /* UI */
-    implementation "com.xwray:groupie:$uiGroupie"
-    implementation "com.xwray:groupie-databinding:$uiGroupie"
-    implementation "com.xwray:groupie-kotlin-android-extensions:$uiGroupie"
+    implementation "com.github.etiennelenhart:eiffel:$uiEiffel"
 
     /* Misc */
+    implementation "joda-time:joda-time:$miscJodaTime"
     implementation "com.github.quickpermissions:quickpermissions-kotlin:$miscQuickPermissions"
 
     /* Debug Utils */
@@ -55,4 +63,12 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$testAndroidRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testEspresso"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$testEspresso"
+}
+
+static def getGitHash() {
+    return "git rev-parse --short HEAD".execute().text.trim()
+}
+
+static def getWorkingBranch() {
+    return "git rev-parse --abbrev-ref HEAD".execute().text.trim()
 }

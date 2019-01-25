@@ -13,8 +13,5 @@
         android:label="AboutFragment"
         tools:layout="@layout/fragment_about"
         >
-        <argument
-            android:name="args"
-            app:argType="ca.hoogit.features.about.AboutArgs"/>
     </fragment>
 </navigation>

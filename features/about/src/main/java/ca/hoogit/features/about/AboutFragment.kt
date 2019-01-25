@@ -1,13 +1,38 @@
 package ca.hoogit.features.about
 
+import androidx.annotation.StringRes
 import ca.hoogit.coreview.fragment.BindableFragment
-import ca.hoogit.coreview.lib.NavFragment
+import ca.hoogit.coreview.util.ktx.launchChromeTab
 import ca.hoogit.coreview.viewmodel.injectedViewModel
 import ca.hoogit.features.about.databinding.FragmentAboutBinding
+import ca.hoogit.ktx.launchViewIntent
+import ca.hoogit.ktx.onClick
+import ca.hoogit.ktx.showMessage
+import ca.hoogit.ktx.util.openRateApp
 
-internal class AboutFragment : BindableFragment<FragmentAboutBinding>(), NavFragment {
+internal class AboutFragment : BindableFragment<FragmentAboutBinding>() {
 
     override fun getLayoutRes(): Int = R.layout.fragment_about
 
     private val viewModel by injectedViewModel<AboutViewModel>()
+
+    override fun setupViews() = with(binding) {
+        btnViewWebsite.onClick { launchChromeTab(R.string.app_url) }
+        btnSource.onClick { launchChromeTab(R.string.git_url) }
+        txtBroughtBy.onClick { launchChromeTab(R.string.author_url) }
+
+        btnInspiredBy.onClick { requireContext().launchViewIntent(R.string.inspired_by_url) }
+
+        btnRate.onClick { openRateApp(requireContext()) }
+        btnShare.onClick { binding.root.showMessage("Coming soon!") }
+    }
+
+    override fun subscribeViewModel() {
+        viewModel.observeState(owner) { state ->
+            binding.state = state
+        }
+    }
+
+    private fun launchChromeTab(@StringRes url: Int) =
+        requireContext().launchChromeTab(getString(url))
 }

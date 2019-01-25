@@ -44,6 +44,7 @@ dependencies {
     implementation "com.xwray:groupie-kotlin-android-extensions:$uiGroupie"
 
     /* Misc */
+    implementation "joda-time:joda-time:$miscJodaTime"
     implementation "com.github.quickpermissions:quickpermissions-kotlin:$miscQuickPermissions"
 
     /* Debug Utils */
