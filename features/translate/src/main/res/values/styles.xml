@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextBubble" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/color_input_text_box_stroke</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxBackgroundColor">@color/colorPrimaryLight</item>
+        <item name="boxCornerRadiusTopStart">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
+    </style>
+
+</resources>

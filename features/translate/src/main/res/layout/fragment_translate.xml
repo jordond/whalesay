@@ -16,54 +16,47 @@
         tools:background="@color/colorPrimary"
         >
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtTest"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Test"
-            android:textColor="@color/white"
-            android:textSize="28sp"
+            android:layout_marginTop="32dp"
+            app:srcCompat="@drawable/ic_whale_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="200dp"
+            android:minHeight="100dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="@dimen/margin_bottom_app_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:boxStrokeWidth="0dp"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            style="@style/TextBubble"
+            >
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnTestNetwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test Network error"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTest"
-            />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:gravity="top|start"
+                android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textCapSentences|textAutoComplete"
+                android:hint="Type here or press the button to record your text"
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnTestGeneric"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test Generic error"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnTestNetwork"
-            />
+                tools:minHeight="100dp"
+                />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnTestGoogle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test Google error"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnTestGeneric"
-            />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

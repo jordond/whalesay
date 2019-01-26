@@ -74,7 +74,7 @@
             android:text="@string/try_again"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="@dimen/margin_bottom_app_bar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:icon="@drawable/ic_arrow_back"

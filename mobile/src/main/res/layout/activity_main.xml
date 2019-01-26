@@ -2,6 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     >
 
     <data>
@@ -55,7 +56,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@id/viewBottomBar"
+            app:rippleColor="@color/colorPrimary"
+            android:tint="@color/colorPrimaryDark"
             app:fabSize="normal"
+            tools:src="@drawable/ic_mic_off_white"
             />
 
         <com.google.android.material.bottomappbar.BottomAppBar
