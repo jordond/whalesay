@@ -1,28 +1,11 @@
 package ca.hoogit.whalesay.di
 
-import androidx.lifecycle.ViewModel
-import ca.hoogit.core.di.scopes.ActivityScoped
-import ca.hoogit.core.di.viewmodel.ViewModelKey
-import ca.hoogit.features.about.AboutFeatureModule
-import ca.hoogit.whalesay.ui.MainActivity
-import ca.hoogit.whalesay.ui.MainViewModel
-import dagger.Binds
+import ca.hoogit.whalesay.ui.MainModule
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
-import dagger.multibindings.IntoMap
 
-@Module
-internal abstract class ActivityBindingModule {
-
-    @ActivityScoped
-    @ContributesAndroidInjector(
-        modules = [
-            AboutFeatureModule::class
-        ]
-    )
-    internal abstract fun mainActivity(): MainActivity
-
-    @Binds @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
-}
+@Module(
+    includes = [
+        MainModule::class
+    ]
+)
+internal abstract class ActivityBindingModule

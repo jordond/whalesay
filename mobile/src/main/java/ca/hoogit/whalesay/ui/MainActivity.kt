@@ -1,6 +1,6 @@
 package ca.hoogit.whalesay.ui
 
-import androidx.navigation.NavController
+import android.os.Bundle
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -16,31 +16,59 @@ class MainActivity : BindableActivity<ActivityMainBinding>() {
 
     private val viewModel by lazy { getViewModel<MainViewModel>() }
 
-    override fun setupViews() {
-        with(findNavController(R.id.navHost)) {
-            setupToolbar(this)
-            setupNavListener(this)
-        }
+    private val navController by lazy { findNavController(R.id.navHost) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme_NoActionBar)
+        super.onCreate(savedInstanceState)
     }
 
-    private fun setupToolbar(navController: NavController) = with(binding.toolbar) {
+    override fun setupViews() {
+        setupToolbar()
+        setupBottomBar()
+        setupNavListener()
+    }
+
+    private fun setupToolbar() = with(binding.toolbar) {
         setSupportActionBar(this)
         setupWithNavController(navController)
     }
 
-    private fun setupNavListener(navController: NavController) = with(navController) {
+    private fun setupBottomBar() = with(binding.viewBottomBar) {
+        replaceMenu(R.menu.menu_mobile)
+        setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.aboutFragment -> navController.navigate(R.id.aboutFragment)
+            }
+            true
+        }
+    }
+
+    private fun setupNavListener() = with(navController) {
         onDestinationChanged {
-            binding.showToolbar = shouldShowToolbar
+            binding.showToolbar = shouldShowToolBar
+            binding.showBottomBar = shouldShowBottomBar
+
+            with(binding.btnFAB) {
+                if (shouldShowBottomBar) show() else hide()
+            }
         }
     }
 
     companion object {
 
         val DESTINATIONS_HIDE_TOOLBAR = listOf(
+            R.id.translateFragment
+        )
+
+        val DESTINATIONS_HIDE_BOTTOM_BAR = listOf(
             R.id.aboutFragment
         )
     }
 }
 
-private val NavDestination.shouldShowToolbar: Boolean
+private val NavDestination.shouldShowToolBar: Boolean
     get() = !MainActivity.DESTINATIONS_HIDE_TOOLBAR.contains(id)
+
+private val NavDestination.shouldShowBottomBar: Boolean
+    get() = !MainActivity.DESTINATIONS_HIDE_BOTTOM_BAR.contains(id)

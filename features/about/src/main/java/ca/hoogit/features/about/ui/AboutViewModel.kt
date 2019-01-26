@@ -7,7 +7,10 @@ import javax.inject.Inject
 
 sealed class AboutAction : Action
 
-internal class AboutViewModel @Inject constructor() : EiffelViewModel<AboutState, AboutAction>(
-    initialState = AboutState(),
-    update = update { state, _ -> state }
-)
+private val updater = update<AboutState, AboutAction> { state, _ -> state }
+
+internal class AboutViewModel @Inject constructor() :
+    EiffelViewModel<AboutState, AboutAction>(
+        initialState = AboutState(),
+        update = updater
+    )

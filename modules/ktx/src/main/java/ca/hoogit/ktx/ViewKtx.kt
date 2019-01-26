@@ -84,6 +84,15 @@ fun View.onLayoutChange(block: (View) -> Unit) {
     }
 }
 
+fun View.animateOffscreenBottomDown(
+    duration: Long? = null,
+    factor: Float = 2f,
+    distance: Float = 20f
+) = animateYAccelerate(height.toFloat() + distance, duration, factor)
+
+fun View.animateOnscreenBottomUp(duration: Long? = null, factor: Float = 2f) =
+    animateYDecelerate(0f, duration, factor)
+
 fun View.animateYDecelerate(to: Float, duration: Long? = null, factor: Float = 2f) =
     animateY(to, DecelerateInterpolator(factor), duration)
 

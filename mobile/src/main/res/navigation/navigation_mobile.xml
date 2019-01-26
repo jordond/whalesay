@@ -4,8 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_mobile"
-    app:startDestination="@id/aboutFragment"
+    app:startDestination="@id/navigation_feature_translate"
     >
+
+    <include
+        app:graph="@navigation/navigation_feature_translate"
+        />
 
     <fragment
         android:id="@+id/aboutFragment"

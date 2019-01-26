@@ -6,6 +6,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import androidx.core.view.marginBottom
 import androidx.core.view.marginTop
 import androidx.databinding.BindingAdapter
 import ca.hoogit.core.Constants
@@ -14,6 +15,11 @@ import ca.hoogit.ktx.updateMargins
 @BindingAdapter("android:layout_marginTop")
 fun View.updateMarginTop(margin: Float) {
     updateMargins(top = Math.round(margin))
+}
+
+@BindingAdapter("android:layout_marginBottom")
+fun View.updateMarginBottom(margin: Float) {
+    updateMargins(bottom = Math.round(margin))
 }
 
 @BindingAdapter("animatedMarginTop")
@@ -26,6 +32,22 @@ fun View.animateUpdateMarginTop(finalMargin: Float) {
     object : Animation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             updateMarginTop(start + ((finalMargin - start) * interpolatedTime))
+        }
+    }
+        .apply { duration = Constants.NAV_HOST_ANIMATION_DURATION }
+        .let { startAnimation(it) }
+}
+
+@BindingAdapter("animatedMarginBottom")
+fun View.animateUpdateMarginBottom(finalMargin: Float) {
+    val needsToAnimate = Math.round(finalMargin) != marginBottom
+
+    if (!needsToAnimate) return
+
+    val start = marginBottom
+    object : Animation() {
+        override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
+            updateMarginBottom(start + ((finalMargin - start) * interpolatedTime))
         }
     }
         .apply { duration = Constants.NAV_HOST_ANIMATION_DURATION }

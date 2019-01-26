@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
@@ -9,6 +8,11 @@
 
         <variable
             name="showToolbar"
+            type="boolean"
+            />
+
+        <variable
+            name="showBottomBar"
             type="boolean"
             />
 
@@ -22,10 +26,8 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:theme="@style/AppTheme"
-            style="@style/Toolbar"
             app:animateVisibility="@{showToolbar}"
-            tools:text="@string/app_name"
+            style="@style/Toolbar"
             />
 
         <ca.hoogit.coreview.views.NestedCoordinatorLayout
@@ -33,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:animatedMarginTop="@{showToolbar ? @dimen/actionBarSize : 0}"
+            app:animatedMarginBottom="@{showBottomBar ? @dimen/actionBarSize : 0}"
             >
 
             <fragment
@@ -46,6 +49,24 @@
                 />
 
         </ca.hoogit.coreview.views.NestedCoordinatorLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/viewBottomBar"
+            app:fabSize="normal"
+            />
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/viewBottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionBarSize"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:fabAlignmentMode="center"
+            app:animateVisibilityBottom="@{showBottomBar}"
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

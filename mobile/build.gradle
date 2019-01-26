@@ -6,5 +6,6 @@ dependencies {
     implementation project(path: ':modules:ktx')
 
     /* Features */
+    implementation project(path: ':features:translate')
     implementation project(path: ':features:about')
 }
