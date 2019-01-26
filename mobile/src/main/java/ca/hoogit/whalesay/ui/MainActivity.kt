@@ -20,7 +20,7 @@ class MainActivity : BindableActivity<ActivityMainBinding>() {
     private val navController by lazy { findNavController(R.id.navHost) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme_NoActionBar)
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
     }
 
