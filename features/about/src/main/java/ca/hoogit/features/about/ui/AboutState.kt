@@ -1,4 +1,4 @@
-package ca.hoogit.features.about
+package ca.hoogit.features.about.ui
 
 import ca.hoogit.features.about.util.AppInfo
 import com.etiennelenhart.eiffel.state.State

@@ -11,6 +11,6 @@ class AppInfo {
     val gitBranch: String = BuildConfig.GIT_BRANCH
     val gitCommit: String = BuildConfig.GIT_HASH
 
-    private fun displayBuildDate() = DateTime(BuildConfig.BUILD_DATE * 1000L)
+    private fun displayBuildDate() = DateTime(BuildConfig.BUILD_DATE)
         .run { toString("MMMM d, yyyy - h:mm aa") }
 }

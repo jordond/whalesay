@@ -3,8 +3,5 @@
     <string name="app_url">https://whalesay.worldturtle.ca</string>
     <string name="author_name">Jordon de Hoog</string>
     <string name="author_url">https://worldturtle.ca</string>
-    <string name="brought_to_you_by">Brought to you by World Turtle Media</string>
-    <string name="inspired_by">Inspired by %s</string>
-    <string name="inspired_by_url">talktowhales.com</string>
     <string name="git_url">https://github.com/jordond/whalesay</string>
 </resources>

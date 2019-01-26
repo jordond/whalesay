@@ -9,8 +9,8 @@
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="ca.hoogit.features.about.AboutFragment"
-        android:label="About"
+        android:name="ca.hoogit.features.about.ui.AboutFragment"
+        android:label=" "
         tools:layout="@layout/fragment_about"
         />
 </navigation>

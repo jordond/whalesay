@@ -82,6 +82,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$diDagger"
 
     /* UI */
+    implementation "com.github.etiennelenhart:eiffel:$uiEiffel"
     implementation "com.xwray:groupie:$uiGroupie"
     implementation "com.xwray:groupie-databinding:$uiGroupie"
     implementation "com.xwray:groupie-kotlin-android-extensions:$uiGroupie"

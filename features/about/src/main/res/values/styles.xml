@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <style name="AboutText">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AboutText.TextButton">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="layout_constraintHorizontal_bias">0.47</item>
+    </style>
+</resources>

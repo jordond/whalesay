@@ -3,6 +3,7 @@ package ca.hoogit.whalesay.di
 import androidx.lifecycle.ViewModel
 import ca.hoogit.core.di.scopes.ActivityScoped
 import ca.hoogit.core.di.viewmodel.ViewModelKey
+import ca.hoogit.features.about.AboutFeatureModule
 import ca.hoogit.whalesay.ui.MainActivity
 import ca.hoogit.whalesay.ui.MainViewModel
 import dagger.Binds
@@ -14,7 +15,11 @@ import dagger.multibindings.IntoMap
 internal abstract class ActivityBindingModule {
 
     @ActivityScoped
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(
+        modules = [
+            AboutFeatureModule::class
+        ]
+    )
     internal abstract fun mainActivity(): MainActivity
 
     @Binds @IntoMap

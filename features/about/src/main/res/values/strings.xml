@@ -7,4 +7,7 @@
     <string name="app_id">App ID: %s</string>
     <string name="build_date">Build Date: %s</string>
     <string name="git_info">%s@%s</string>
+    <string name="brought_to_you_by">Brought to you by World Turtle Media</string>
+    <string name="inspired_by">Inspired by %s</string>
+    <string name="inspired_by_url">talktowhales.com</string>
 </resources>

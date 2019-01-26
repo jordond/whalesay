@@ -10,14 +10,14 @@ import kotlin.reflect.KClass
 class ActivityViewModelLazy<VM : ViewModel>(
     private val vmClass: KClass<VM>,
     private val activity: FragmentActivity,
-    private val factoryProducer: ViewModelProvider.Factory
+    private val factoryProducer: () -> ViewModelProvider.Factory
 ) : Lazy<VM> {
 
     private var cached: VM? = null
 
     override val value: VM
         get() = cached
-            ?: ViewModelProviders.of(activity, factoryProducer)
+            ?: ViewModelProviders.of(activity, factoryProducer())
                 .get(vmClass.java)
                 .also { cached = it }
 
@@ -26,5 +26,5 @@ class ActivityViewModelLazy<VM : ViewModel>(
 
 @MainThread
 inline fun <reified VM : ViewModel> FragmentActivity.injectedViewModel(
-    factory: ViewModelProvider.Factory
-) = ActivityViewModelLazy(VM::class, this, factory)
+    noinline factoryProvider: () -> ViewModelProvider.Factory
+) = ActivityViewModelLazy(VM::class, this, factoryProvider)

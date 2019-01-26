@@ -1,10 +1,10 @@
-package ca.hoogit.features.about.di
+package ca.hoogit.features.about.ui.di
 
 import androidx.lifecycle.ViewModel
 import ca.hoogit.core.di.scopes.FragmentScoped
 import ca.hoogit.core.di.viewmodel.ViewModelKey
-import ca.hoogit.features.about.AboutFragment
-import ca.hoogit.features.about.AboutViewModel
+import ca.hoogit.features.about.ui.AboutFragment
+import ca.hoogit.features.about.ui.AboutViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

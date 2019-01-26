@@ -11,8 +11,9 @@ abstract class BindableActivity<T : ViewDataBinding> : BaseActivity() {
     override fun createView(@LayoutRes layoutRes: Int) {
         binding = DataBindingUtil.setContentView(this, layoutRes)
 
+        bindData()
         binding.setLifecycleOwner(this)
     }
 
-    abstract fun bindData()
+    open fun bindData() {}
 }

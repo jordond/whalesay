@@ -1,4 +1,4 @@
-package ca.hoogit.features.about
+package ca.hoogit.features.about.ui
 
 import com.etiennelenhart.eiffel.state.Action
 import com.etiennelenhart.eiffel.state.update

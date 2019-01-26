@@ -32,7 +32,7 @@ inline fun <reified VM : ViewModel> BaseActivity.getViewModel(): VM = getViewMod
  * private val viewModel by injectedViewModel<MyViewModel>()
  */
 inline fun <reified VM : ViewModel> BaseActivity.injectedViewModel() =
-    injectedViewModel<VM>(viewModelFactory)
+    injectedViewModel<VM> { viewModelFactory }
 
 /**
  * Like [BaseActivity.getViewModel] for [BaseFragment]s
@@ -52,7 +52,7 @@ inline fun <reified VM : ViewModel> BaseFragment.getSharedViewModel(parent: Frag
  * private val viewModel by injectedViewModel<MyViewModel>()
  */
 inline fun <reified VM : ViewModel> BaseFragment.injectedViewModel() =
-    injectedViewModel<VM>(viewModelFactory)
+    injectedViewModel<VM> { viewModelFactory }
 
 /**
  * Like [BaseFragment.injectedViewModel] for [BaseFragment]'s that want a [ViewModel] scoped to the activity.
@@ -61,4 +61,4 @@ inline fun <reified VM : ViewModel> BaseFragment.injectedViewModel() =
  * private val viewModel by injectedSharedViewModel<MyViewModel>()
  */
 inline fun <reified VM : ViewModel> BaseFragment.injectedSharedViewModel() =
-    injectedSharedViewModel<VM>(viewModelFactory)
+    injectedSharedViewModel<VM> { viewModelFactory }
