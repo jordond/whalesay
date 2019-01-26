@@ -1,4 +1,8 @@
 <resources>
     <string name="error_generic">Something went wrong</string>
+    <string name="error_network">Unable to connect to the internet</string>
+    <string name="error_google">Unable to contact Google</string>
+    <string name="error_speech_to_text">Unable to convert your speech to text</string>
+    <string name="error_text_to_speech">Unable to convert your text to speech</string>
     <string name="try_again">Try again</string>
 </resources>

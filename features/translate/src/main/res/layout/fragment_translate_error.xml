@@ -7,6 +7,10 @@
 
     <data>
 
+        <variable
+            name="state"
+            type="ca.hoogit.features.translate.ui.error.state.ErrorBindingState"
+            />
 
     </data>
 
@@ -36,28 +40,31 @@
             android:id="@+id/txtErrorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/error_generic"
+            android:text="@{state.titleID}"
+            android:textColor="@color/white"
+            android:textAppearance="@android:style/TextAppearance.Material.Display1"
             app:layout_constraintTop_toBottomOf="@+id/imgLogo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textAppearance="@android:style/TextAppearance.Material.Display1"
-            android:textColor="@color/white"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toTopOf="@+id/txtErrorSubText"
+            tools:text="@string/error_generic"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtErrorSubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Unable to contact Google's servers"
+            android:textColor="@color/white"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:text="@{state.subTitleID}"
+            app:visibleOrGone="@{state.showSubTitle}"
             app:layout_constraintTop_toBottomOf="@+id/txtErrorText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textAppearance="@android:style/TextAppearance.Material.Medium"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
+            tools:text="@string/error_google"
             />
 
         <com.google.android.material.button.MaterialButton

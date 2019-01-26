@@ -13,6 +13,25 @@
         android:label=" "
         tools:layout="@layout/fragment_translate"
         >
+        <action
+            android:id="@+id/showErrorScreen"
+            app:destination="@id/errorFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="ca.hoogit.features.translate.ui.error.ErrorFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_translate_error"
+        >
+        <argument
+            android:name="data"
+            app:argType="ca.hoogit.features.translate.ui.error.ErrorNavArgs"/>
     </fragment>
 
 </navigation>
