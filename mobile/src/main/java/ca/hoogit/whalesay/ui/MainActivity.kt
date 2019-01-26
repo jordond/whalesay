@@ -7,6 +7,7 @@ import androidx.navigation.ui.setupWithNavController
 import ca.hoogit.coreview.activity.BindableActivity
 import ca.hoogit.coreview.util.onDestinationChanged
 import ca.hoogit.coreview.viewmodel.getViewModel
+import ca.hoogit.whalesay.NavigationMobileDirections
 import ca.hoogit.whalesay.R
 import ca.hoogit.whalesay.databinding.ActivityMainBinding
 
@@ -38,7 +39,8 @@ class MainActivity : BindableActivity<ActivityMainBinding>() {
         replaceMenu(R.menu.menu_mobile)
         setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.aboutFragment -> navController.navigate(R.id.aboutFragment)
+                R.id.aboutFragment ->
+                    navController.navigate(NavigationMobileDirections.showAboutScreen())
             }
             true
         }
