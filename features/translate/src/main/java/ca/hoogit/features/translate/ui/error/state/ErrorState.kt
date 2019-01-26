@@ -5,7 +5,7 @@ import com.etiennelenhart.eiffel.state.State
 import com.etiennelenhart.eiffel.state.ViewEvent
 
 sealed class ErrorNavEvents : ViewEvent() {
-    object Back : ErrorNavEvents()
+    class Back : ErrorNavEvents()
 }
 
 data class ErrorState(

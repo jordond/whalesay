@@ -23,6 +23,8 @@ class ErrorFragment : BindableFragment<FragmentTranslateErrorBinding>() {
     private val args by navArgs<ErrorFragmentArgs>()
 
     override fun setupViews() {
+        binding.state = bindingState
+
         binding.btnTryAgain.onClick { viewModel.onTryAgainClicked() }
     }
 

@@ -29,6 +29,42 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTestNetwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Network error"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTest"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTestGeneric"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Generic error"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnTestNetwork"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTestGoogle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Google error"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnTestGeneric"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

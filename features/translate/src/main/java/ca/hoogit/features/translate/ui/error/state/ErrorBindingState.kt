@@ -11,7 +11,7 @@ class ErrorBindingState : BaseObservable(), BindingState<ErrorState> {
 
     var titleID = ObservableInt(R.string.error_generic)
 
-    var subTitleID = ObservableInt(0)
+    var subTitleID = ObservableInt(R.string.empty)
 
     var showSubTitle = ObservableBoolean(true)
 
@@ -23,10 +23,10 @@ class ErrorBindingState : BaseObservable(), BindingState<ErrorState> {
             ErrorType.Google -> R.string.error_google
             ErrorType.SpeechToText -> R.string.error_speech_to_text
             ErrorType.TextToSpeech -> R.string.error_text_to_speech
-            else -> 0
+            else -> R.string.empty
         }
 
         subTitleID.set(resID)
-        showSubTitle.set(resID != 0)
+        showSubTitle.set(resID != R.string.empty)
     }
 }

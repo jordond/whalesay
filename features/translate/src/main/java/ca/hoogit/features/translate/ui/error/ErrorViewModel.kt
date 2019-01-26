@@ -26,6 +26,6 @@ class ErrorViewModel @Inject constructor() : EiffelViewModel<ErrorState, ErrorAc
 ) {
 
     fun onTryAgainClicked() {
-        dispatch(ErrorAction.Navigate(ErrorNavEvents.Back))
+        dispatch(ErrorAction.Navigate(ErrorNavEvents.Back()))
     }
 }
