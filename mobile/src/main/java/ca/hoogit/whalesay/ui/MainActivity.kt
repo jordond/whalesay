@@ -5,11 +5,14 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.hoogit.coreview.activity.BindableActivity
+import ca.hoogit.coreview.fragment.BaseFragment
 import ca.hoogit.coreview.util.onDestinationChanged
 import ca.hoogit.coreview.viewmodel.getViewModel
 import ca.hoogit.whalesay.NavigationMobileDirections
 import ca.hoogit.whalesay.R
 import ca.hoogit.whalesay.databinding.ActivityMainBinding
+
+fun BaseFragment.getFAB() = (activity as? MainActivity)?.fab
 
 class MainActivity : BindableActivity<ActivityMainBinding>() {
 
@@ -18,6 +21,8 @@ class MainActivity : BindableActivity<ActivityMainBinding>() {
     private val viewModel by lazy { getViewModel<MainViewModel>() }
 
     private val navController by lazy { findNavController(R.id.navHost) }
+
+    val fab by lazy { binding.btnFAB }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)

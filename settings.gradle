@@ -1,1 +1,7 @@
-include ':mobile', ':modules:core', ':modules:coreview', ':modules:ktx', ':features:about', ':features:translate'
+include ':mobile',
+        ':modules:core',
+        ':modules:coreview',
+        ':modules:ktx',
+        ':data:db',
+        ':features:about',
+        ':features:translate'

@@ -1,11 +1,15 @@
 apply from: "${rootDir}/buildsystem/app.gradle"
 
 dependencies {
+    /* Library modules */
     implementation project(path: ':modules:core')
     implementation project(path: ':modules:coreview')
     implementation project(path: ':modules:ktx')
 
-    /* Features */
+    /* Data modules */
+    implementation project(path: ':data:db')
+
+    /* Features modules */
     implementation project(path: ':features:translate')
     implementation project(path: ':features:about')
 }

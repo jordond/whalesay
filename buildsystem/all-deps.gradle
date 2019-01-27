@@ -42,6 +42,10 @@ dependencies {
     implementation "com.xwray:groupie-databinding:$uiGroupie"
     implementation "com.xwray:groupie-kotlin-android-extensions:$uiGroupie"
 
+    /* Shared preferences database */
+    implementation "com.chibatching.kotpref:kotpref:$prefsKotpref"
+    implementation "com.chibatching.kotpref:initializer:$prefsKotpref"
+
     /* Misc */
     implementation "joda-time:joda-time:$miscJodaTime"
     implementation "com.github.quickpermissions:quickpermissions-kotlin:$miscQuickPermissions"
