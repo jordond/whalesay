@@ -38,8 +38,6 @@
             android:layout_marginBottom="@dimen/margin_bottom_app_bar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:boxStrokeWidth="0dp"
-            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/TextBubble"
             >
@@ -52,7 +50,6 @@
                 android:gravity="top|start"
                 android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textCapSentences|textAutoComplete"
                 android:hint="Type here or press the button to record your text"
-
                 tools:minHeight="100dp"
                 />
 

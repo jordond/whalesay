@@ -9,6 +9,7 @@
         <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
         <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
+        <item name="hintEnabled">false</item>
     </style>
 
 </resources>

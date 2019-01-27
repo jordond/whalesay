@@ -6,4 +6,5 @@
     <color name="colorAccent">@color/white</color>
     <color name="white">#fff</color>
     <color name="red">#f44336</color>
+    <color name="windowBackground">@color/colorPrimary</color>
 </resources>

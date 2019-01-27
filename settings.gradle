@@ -3,5 +3,6 @@ include ':mobile',
         ':modules:coreview',
         ':modules:ktx',
         ':data:db',
+        ':features:onboarding',
         ':features:about',
         ':features:translate'

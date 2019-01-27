@@ -1,0 +1,8 @@
+apply from: "${rootDir}/buildsystem/feature.gradle"
+
+dependencies {
+    implementation project(":modules:core")
+    implementation project(":modules:coreview")
+    implementation project(":modules:ktx")
+    implementation project(":data:db")
+}
