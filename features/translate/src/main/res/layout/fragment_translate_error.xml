@@ -73,17 +73,11 @@
             android:layout_height="wrap_content"
             android:text="@string/try_again"
             android:layout_marginBottom="@dimen/margin_bottom_app_bar"
-            android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:icon="@drawable/ic_arrow_back"
-            app:backgroundTint="@color/colorPrimary"
-            app:iconTint="@color/white"
-            app:strokeColor="@color/white"
-            app:rippleColor="@color/colorPrimaryDark"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            style="@style/AccentOutlineButton"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
