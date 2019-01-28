@@ -6,8 +6,10 @@ import ca.hoogit.coreview.state.MicPermissionState.Granted
 import ca.hoogit.coreview.state.MicPermissionState.Pending
 import ca.hoogit.coreview.state.MicPermissionState.PermanentlyDenied
 import ca.hoogit.coreview.util.ktx.currentState
+import ca.hoogit.data.db.prefs.Prefs
 import ca.hoogit.features.onboarding.ui.OnboardingAction.DispatchEvent
 import ca.hoogit.features.onboarding.ui.OnboardingAction.UpdateMicPermission
+import com.etiennelenhart.eiffel.interception.pipe
 import com.etiennelenhart.eiffel.state.Action
 import com.etiennelenhart.eiffel.state.State
 import com.etiennelenhart.eiffel.state.ViewEvent
@@ -32,8 +34,19 @@ sealed class OnboardingAction : Action {
     data class DispatchEvent(val event: OnboardingEvents) : OnboardingAction()
 }
 
-class OnboardingViewModel @Inject constructor() : EiffelViewModel<OnboardingState, OnboardingAction>(
+private fun onNavigateUpdatePrefs(prefs: Prefs) = pipe<OnboardingState, OnboardingAction> { state, action ->
+    if (action is DispatchEvent && action.event is OnboardingEvents.NavigateHome) {
+        prefs.hasSeenOnboarding = true
+    }
+}
+
+class OnboardingViewModel @Inject constructor(
+    prefs: Prefs
+) : EiffelViewModel<OnboardingState, OnboardingAction>(
     initialState = OnboardingState(),
+    interceptions = listOf(
+        onNavigateUpdatePrefs(prefs)
+    ),
     update = update { state, action ->
         when (action) {
             is UpdateMicPermission -> state.copy(micState = action.state)
