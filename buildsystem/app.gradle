@@ -101,6 +101,20 @@ dependencies {
     debugImplementation "com.facebook.stetho:stetho:$debugStetho"
     debugImplementation "com.facebook.stetho:stetho-okhttp3:$debugStetho"
 
+    /* Hyperion */
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-core:$debugHyperion"
+    releaseImplementation "com.willowtreeapps.hyperion:hyperion-core-no-op:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-attr:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-measurement:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-disk:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-recorder:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-phoenix:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-crash:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-shared-preferences:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-geiger-counter:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-timber:$debugHyperion"
+    debugImplementation "com.willowtreeapps.hyperion:hyperion-build-config:$debugHyperion"
+
     /* Testing */
     testImplementation "junit:junit:$testJunit"
     testImplementation "androidx.arch.core:core-testing:$testAndroidArch"

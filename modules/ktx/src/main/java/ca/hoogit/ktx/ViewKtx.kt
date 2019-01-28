@@ -86,9 +86,13 @@ fun View.onLayoutChange(block: (View) -> Unit) {
 
 fun View.animateOffscreenBottomDown(
     duration: Long? = null,
+    defaultHeight: Int = height,
     factor: Float = 2f,
     distance: Float = 20f
-) = animateYAccelerate(height.toFloat() + distance, duration, factor)
+) {
+    val to = if (height == 0) defaultHeight else height
+    animateYAccelerate(to + distance, duration, factor)
+}
 
 fun View.animateOnscreenBottomUp(duration: Long? = null, factor: Float = 2f) =
     animateYDecelerate(0f, duration, factor)

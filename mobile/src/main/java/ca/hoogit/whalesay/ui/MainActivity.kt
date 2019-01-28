@@ -2,7 +2,7 @@ package ca.hoogit.whalesay.ui
 
 import android.os.Bundle
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ca.hoogit.coreview.activity.BindableActivity
 import ca.hoogit.coreview.fragment.BaseFragment
@@ -12,6 +12,7 @@ import ca.hoogit.data.db.prefs.Prefs
 import ca.hoogit.whalesay.NavigationMobileDirections
 import ca.hoogit.whalesay.R
 import ca.hoogit.whalesay.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 fun BaseFragment.getFAB() = (activity as? MainActivity)?.fab
@@ -24,29 +25,27 @@ class MainActivity : BindableActivity<ActivityMainBinding>() {
 
     private val viewModel by lazy { getViewModel<MainViewModel>() }
 
-    private val navController by lazy { findNavController(R.id.navHost) }
+    private val navHostFragment by lazy { navHost as NavHostFragment }
+
+    private val navController by lazy { navHostFragment.navController }
 
     val fab by lazy { binding.btnFAB }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setupNavGraph()
+    }
+
+    override fun beforeSetup() {
+        if (!prefs.hasSeenOnboarding) {
+            navController.navigate(NavigationMobileDirections.showOnboardingScreen())
+        }
     }
 
     override fun setupViews() {
         setupToolbar()
         setupBottomBar()
         setupNavListener()
-    }
-
-    private fun setupNavGraph() {
-        val graph = navController.graph
-        graph.startDestination =
-            if (prefs.hasSeenOnboarding) R.id.translateFragment
-            else R.id.onboardingFragment
-
-        navController.graph = graph
     }
 
     private fun setupToolbar() = with(binding.toolbar) {
@@ -67,8 +66,6 @@ class MainActivity : BindableActivity<ActivityMainBinding>() {
 
     private fun setupNavListener() = with(navController) {
         onDestinationChanged {
-            setupNavGraph()
-
             binding.showToolbar = shouldShowToolBar
             binding.showBottomBar = shouldShowBottomBar
 

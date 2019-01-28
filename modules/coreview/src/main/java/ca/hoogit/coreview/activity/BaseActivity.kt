@@ -19,6 +19,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         createView(layoutResID)
+        beforeSetup()
         setup()
     }
 
@@ -33,6 +34,8 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         subscribeViewModel()
         afterCreate()
     }
+
+    open fun beforeSetup() {}
 
     open fun setupViews() {}
 

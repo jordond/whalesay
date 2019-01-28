@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/white</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
         <item name="android:windowBackground">@color/windowBackground</item>
@@ -15,7 +16,7 @@
         <item name="android:windowBackground">@drawable/bg_launcher</item>
     </style>
 
-    <style name="ToolbarWhiteControls" parent="Theme.AppCompat.NoActionBar">
+    <style name="ToolbarWhiteControls" parent="Theme.MaterialComponents">
         <item name="android:textColorPrimary">@color/white</item>
         <item name="actionMenuTextColor">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
@@ -70,6 +71,7 @@
         <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
         <item name="hintEnabled">false</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 
 </resources>

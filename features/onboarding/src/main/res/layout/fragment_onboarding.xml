@@ -66,13 +66,6 @@
             app:layout_constraintBottom_toTopOf="@+id/txtPermissionRational"
             />
 
-        <!--<androidx.constraintlayout.widget.Group-->
-        <!--android:id="@+id/groupMicPermissions"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:constraint_referenced_ids="txtPermissionRational,btnFab,btnHelpIcon"-->
-        <!--/>-->
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtPermissionRational"
             android:layout_width="0dp"

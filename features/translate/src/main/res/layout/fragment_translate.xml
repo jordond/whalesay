@@ -50,6 +50,7 @@
                 android:gravity="top|start"
                 android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textCapSentences|textAutoComplete"
                 android:hint="Type here or press the button to record your text"
+                android:textColorHint="@color/white"
                 tools:minHeight="100dp"
                 />
 
