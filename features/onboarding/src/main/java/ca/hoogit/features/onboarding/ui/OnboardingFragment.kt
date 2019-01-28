@@ -50,15 +50,18 @@ class OnboardingFragment : BindableFragment<FragmentOnboardingBinding>() {
             Denied, PermanentlyDenied -> R.drawable.ic_mic_off_white
         }
 
-        isEnabled = state.micState != PermanentlyDenied
-
         setImageResource(iconRes)
 
-        show()
+        isEnabled = state.micState != Granted
+
+        binding.btnHelpIcon.visibleOrGone = state.micState != PermanentlyDenied
+
+        if (state.micState is PermanentlyDenied) hide() else show()
     }
 
     private fun renderRationalText(state: OnboardingState) = with(binding.txtPermissionRational) {
-        visibleOrGone = state.micState is Denied || state.showRationalMessage
+        visibleOrGone = state.micState !is PermanentlyDenied &&
+            (state.micState is Denied || state.showRationalMessage)
     }
 
     private fun handleEvents(event: OnboardingEvents): Boolean = when (event) {

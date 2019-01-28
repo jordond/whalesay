@@ -19,27 +19,34 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgLogo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="32dp"
             app:srcCompat="@drawable/ic_whale_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/txtWelcome"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintDimensionRatio=""
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtWelcome"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/whalesay_title"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
             android:textColor="@color/colorAccent"
-            android:textAlignment="center"
+            android:gravity="center"
+            app:autoSizeTextType="uniform"
             app:layout_constraintTop_toBottomOf="@+id/imgLogo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/txtDescription"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -49,14 +56,22 @@
             android:text="@string/whalesay_description"
             android:textColor="@color/colorAccent"
             android:gravity="center"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/txtWelcome"
             app:layout_constraintStart_toStartOf="@+id/txtWelcome"
             app:layout_constraintEnd_toEndOf="@+id/txtWelcome"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/txtPermissionRational"
             />
+
+        <!--<androidx.constraintlayout.widget.Group-->
+        <!--android:id="@+id/groupMicPermissions"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:constraint_referenced_ids="txtPermissionRational,btnFab,btnHelpIcon"-->
+        <!--/>-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtPermissionRational"
@@ -72,6 +87,7 @@
             app:layout_constraintStart_toStartOf="@+id/txtWelcome"
             app:layout_constraintEnd_toEndOf="@+id/txtWelcome"
             app:layout_constraintBottom_toTopOf="@+id/btnFab"
+            app:layout_constraintHorizontal_bias="0.5"
             style="@style/TextBubble"
             />
 
@@ -81,10 +97,11 @@
             android:layout_height="wrap_content"
             android:tint="@color/colorPrimaryDark"
             app:fabSize="normal"
-            app:layout_constraintTop_toBottomOf="@+id/txtDescription"
+            app:layout_constraintTop_toBottomOf="@+id/txtPermissionRational"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/btnContinue"
+            app:layout_constraintHorizontal_bias="0.5"
             tools:src="@drawable/ic_mic_white"
             />
 
@@ -105,12 +122,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_continue"
-            android:layout_marginBottom="@dimen/margin_bottom_app_bar"
-            style="@style/AccentOutlineButton"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:icon="@drawable/ic_arrow_forward_white"
+            app:layout_constraintTop_toBottomOf="@+id/btnFab"
+            app:layout_constraintHorizontal_bias="0.5"
+            style="@style/AccentOutlineButton"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
