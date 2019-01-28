@@ -1,6 +1,7 @@
 package ca.hoogit.whalesay.di
 
 import ca.hoogit.core.di.CoreModule
+import ca.hoogit.data.db.DatabaseModule
 import ca.hoogit.whalesay.MainApplication
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -14,6 +15,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AndroidSupportInjectionModule::class,
         CoreModule::class,
+        DatabaseModule::class,
         ActivityBindingModule::class
     ]
 )

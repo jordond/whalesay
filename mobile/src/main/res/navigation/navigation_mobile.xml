@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_mobile"
-    app:startDestination="@id/navigation_feature_translate"
+    app:startDestination="@id/onboardingFragment"
     >
 
     <include
@@ -25,4 +25,13 @@
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
         />
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="ca.hoogit.features.onboarding.ui.OnboardingFragment"
+        android:label="Onboarding"
+        tools:layout="@layout/fragment_onboarding"
+        />
+    <action
+        android:id="@+id/showOnboardingScreen"
+        app:destination="@id/onboardingFragment"/>
 </navigation>

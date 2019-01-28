@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import ca.hoogit.core.di.scopes.ActivityScoped
 import ca.hoogit.core.di.viewmodel.ViewModelKey
 import ca.hoogit.features.about.AboutFeatureModule
+import ca.hoogit.features.onboarding.OnboardingFeatureModule
 import ca.hoogit.features.translate.TranslateFeatureModule
 import dagger.Binds
 import dagger.Module
@@ -16,6 +17,7 @@ internal abstract class MainModule {
     @ActivityScoped
     @ContributesAndroidInjector(
         modules = [
+            OnboardingFeatureModule::class,
             TranslateFeatureModule::class,
             AboutFeatureModule::class
         ]

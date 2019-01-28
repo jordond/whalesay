@@ -1,15 +1,59 @@
 package ca.hoogit.features.onboarding.ui
 
+import ca.hoogit.coreview.state.MicPermissionState
+import ca.hoogit.coreview.state.MicPermissionState.Denied
+import ca.hoogit.coreview.state.MicPermissionState.Granted
+import ca.hoogit.coreview.state.MicPermissionState.Pending
+import ca.hoogit.coreview.state.MicPermissionState.PermanentlyDenied
+import ca.hoogit.coreview.util.ktx.currentState
+import ca.hoogit.features.onboarding.ui.OnboardingAction.DispatchEvent
+import ca.hoogit.features.onboarding.ui.OnboardingAction.UpdateMicPermission
 import com.etiennelenhart.eiffel.state.Action
 import com.etiennelenhart.eiffel.state.State
+import com.etiennelenhart.eiffel.state.ViewEvent
 import com.etiennelenhart.eiffel.state.update
 import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
+import javax.inject.Inject
 
-data class OnboardingState(val mic: Boolean = false) : State
+sealed class OnboardingEvents : ViewEvent() {
+    class NavigateHome : OnboardingEvents()
+    class RequestAudioPermissions : OnboardingEvents()
+}
 
-sealed class OnboardingAction : Action
+data class OnboardingState(
+    val micState: MicPermissionState = Pending,
+    val showRationalMessage: Boolean = false,
+    val event: OnboardingEvents? = null
+) : State
 
-class OnboardingViewModel : EiffelViewModel<OnboardingState, OnboardingAction>(
+sealed class OnboardingAction : Action {
+    data class UpdateMicPermission(val state: MicPermissionState) : OnboardingAction()
+    object ToggleRational : OnboardingAction()
+    data class DispatchEvent(val event: OnboardingEvents) : OnboardingAction()
+}
+
+class OnboardingViewModel @Inject constructor() : EiffelViewModel<OnboardingState, OnboardingAction>(
     initialState = OnboardingState(),
-    update = update { state, action -> state }
-)
+    update = update { state, action ->
+        when (action) {
+            is UpdateMicPermission -> state.copy(micState = action.state)
+            is OnboardingAction.ToggleRational ->
+                state.copy(showRationalMessage = !state.showRationalMessage)
+            is DispatchEvent -> state.copy(event = action.event)
+        }
+    }
+) {
+
+    fun onButtonClicked() {
+        val event = when (currentState.micState) {
+            Pending, Denied -> OnboardingEvents.RequestAudioPermissions()
+            Granted, PermanentlyDenied -> OnboardingEvents.NavigateHome()
+        }
+
+        dispatch(DispatchEvent(event))
+    }
+
+    fun updateMicPermissionStatus(status: MicPermissionState) {
+        dispatch(UpdateMicPermission(status))
+    }
+}

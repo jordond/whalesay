@@ -10,6 +10,7 @@ dependencies {
     implementation project(path: ':data:db')
 
     /* Features modules */
+    implementation project(path: ':features:onboarding')
     implementation project(path: ':features:translate')
     implementation project(path: ':features:about')
 }

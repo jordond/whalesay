@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         tools:background="@color/windowBackground"
         >
 
@@ -20,7 +21,7 @@
             android:id="@+id/imgLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="60dp"
             app:srcCompat="@drawable/ic_whale_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
             android:id="@+id/txtWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome to Whale say!"
+            android:text="@string/whalesay_title"
             android:layout_marginTop="32dp"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
             android:textColor="@color/colorAccent"
@@ -51,10 +52,27 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/txtWelcome"
             app:layout_constraintStart_toStartOf="@+id/txtWelcome"
             app:layout_constraintEnd_toEndOf="@+id/txtWelcome"
-            android:textSize="16sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtPermissionRational"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/permissions_microphone_rational"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:textSize="11sp"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescription"
+            app:layout_constraintStart_toStartOf="@+id/txtWelcome"
+            app:layout_constraintEnd_toEndOf="@+id/txtWelcome"
+            app:layout_constraintBottom_toTopOf="@+id/btnFab"
+            style="@style/TextBubble"
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -62,12 +80,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tint="@color/colorPrimaryDark"
-            android:src="@drawable/ic_mic_none_white"
             app:fabSize="normal"
             app:layout_constraintTop_toBottomOf="@+id/txtDescription"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/btnContinue"
+            tools:src="@drawable/ic_mic_white"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnHelpIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/ic_help_outline_white"
+            app:layout_constraintStart_toEndOf="@id/btnFab"
+            app:layout_constraintBottom_toBottomOf="@id/btnFab"
+            app:layout_constraintTop_toBottomOf="@+id/btnFab"
             />
 
         <com.google.android.material.button.MaterialButton

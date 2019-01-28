@@ -5,4 +5,5 @@
     <string name="author_name">Jordon de Hoog</string>
     <string name="author_url">https://worldturtle.ca</string>
     <string name="git_url">https://github.com/jordond/whalesay</string>
+    <string name="permissions_microphone_rational">WhaleSay needs to access the microphone to record your beautiful voice, in order to translate it.  However you can just type in your message if you don\'t trust us.</string>
 </resources>

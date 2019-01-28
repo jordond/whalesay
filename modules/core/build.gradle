@@ -1,1 +1,5 @@
 apply from: "${rootDir}/buildsystem/module.gradle"
+
+dependencies {
+    implementation "com.github.quickpermissions:quickpermissions-kotlin:$miscQuickPermissions"
+}

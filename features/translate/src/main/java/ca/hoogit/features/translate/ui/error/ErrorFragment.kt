@@ -9,7 +9,7 @@ import ca.hoogit.features.translate.ui.error.state.ErrorBindingState
 import ca.hoogit.features.translate.ui.error.state.ErrorNavEvents
 import ca.hoogit.ktx.navArgs
 import ca.hoogit.ktx.onClick
-import com.etiennelenhart.eiffel.binding.extension.observeState
+import com.etiennelenhart.eiffel.binding.extension.observe
 import com.etiennelenhart.eiffel.state.peek
 
 class ErrorFragment : BindableFragment<FragmentTranslateErrorBinding>() {
@@ -30,7 +30,8 @@ class ErrorFragment : BindableFragment<FragmentTranslateErrorBinding>() {
 
     override fun subscribeViewModel() = with(viewModel) {
         dispatch(ErrorAction.Init(args.data.error))
-        observeState(owner, bindingState) { state ->
+
+        state.observe(owner, bindingState) { state ->
             state.navEvent?.peek(::handleNavEvents)
         }
     }

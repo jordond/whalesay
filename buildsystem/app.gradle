@@ -81,6 +81,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$diDagger"
     kapt "com.google.dagger:dagger-android-processor:$diDagger"
 
+    /* Shared Preferences */
+    implementation "com.chibatching.kotpref:kotpref:$prefsKotpref"
+    implementation "com.chibatching.kotpref:initializer:$prefsKotpref"
+
     /* UI */
     implementation "com.github.etiennelenhart:eiffel:$uiEiffel"
     implementation "com.xwray:groupie:$uiGroupie"
