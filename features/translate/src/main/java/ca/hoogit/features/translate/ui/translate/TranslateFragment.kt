@@ -1,5 +1,6 @@
 package ca.hoogit.features.translate.ui.translate
 
+import ca.hoogit.coreview.bindingadapters.visible
 import ca.hoogit.coreview.bindingadapters.visibleOrGone
 import ca.hoogit.coreview.fragment.BindableFragment
 import ca.hoogit.coreview.state.canUseMic
@@ -37,6 +38,7 @@ class TranslateFragment : BindableFragment<FragmentTranslateBinding>(), Coroutin
         Unit
     }
 
+    // TODO - Hide Whale logo if keyboard is open
     override fun subscribeViewModel() = with(viewModel) {
         initialize(requireContext().microphonePermissionState)
 
@@ -50,7 +52,9 @@ class TranslateFragment : BindableFragment<FragmentTranslateBinding>(), Coroutin
         with(binding.txt2) {
             text = state.whaleText
             visibleOrGone = !state.whaleText.isEmpty()
+            if (visible) binding.txtTextInput.requestFocus()
         }
+        binding.imgLogo.visibleOrGone = state.whaleText.isEmpty()
     }
 
     private fun renderFAB(fab: FloatingActionButton, state: TranslateState) = with(state) {
