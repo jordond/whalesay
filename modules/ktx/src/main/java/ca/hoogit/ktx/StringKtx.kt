@@ -3,6 +3,8 @@ package ca.hoogit.ktx
 import android.net.Uri
 import timber.log.Timber
 
+fun Char.repeat(count: Int) = toString().repeat(count)
+
 fun String.toURI(): Uri? {
     return try {
         Uri.parse(this)

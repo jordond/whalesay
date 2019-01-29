@@ -13,6 +13,9 @@ object Permissions {
     fun hasPermission(context: Context, permission: String): Boolean =
         getPermissionStatus(context, permission) == PackageManager.PERMISSION_GRANTED
 
+    fun permissionsIsDenied(context: Context, permission: String): Boolean =
+        getPermissionStatus(context, permission) == PackageManager.PERMISSION_DENIED
+
     private fun getPermissionStatus(context: Context, permission: String) =
         ActivityCompat.checkSelfPermission(context, permission)
 
@@ -24,3 +27,6 @@ fun Context.hasPermission(permission: String) =
 
 fun Context.hasAllPermissions(vararg permissions: String) =
     Permissions.hasAllPermissions(this, *permissions)
+
+fun Context.permissionIsDenied(permission: String) =
+    Permissions.permissionsIsDenied(this, permission)

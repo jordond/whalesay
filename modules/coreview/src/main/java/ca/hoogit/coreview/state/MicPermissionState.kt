@@ -3,6 +3,7 @@ package ca.hoogit.coreview.state
 import android.content.Context
 import ca.hoogit.core.util.Permissions
 import ca.hoogit.core.util.hasPermission
+import ca.hoogit.core.util.permissionIsDenied
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsOptions
 
@@ -13,9 +14,13 @@ sealed class MicPermissionState {
     object PermanentlyDenied : MicPermissionState()
 }
 
+val MicPermissionState.canUseMic: Boolean
+    get() = this is MicPermissionState.Granted
+
 val Context.microphonePermissionState: MicPermissionState
     get() = when {
         hasPermission(Permissions.MICROPHONE) -> MicPermissionState.Granted
+        permissionIsDenied(Permissions.MICROPHONE) -> MicPermissionState.Denied
         else -> MicPermissionState.Pending
     }
 
