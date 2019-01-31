@@ -1,4 +1,4 @@
-package ca.hoogit.coreview.lib
+package ca.hoogit.coreview.lib.eiffel
 
 import com.etiennelenhart.eiffel.interception.Adapter
 import com.etiennelenhart.eiffel.interception.Filter

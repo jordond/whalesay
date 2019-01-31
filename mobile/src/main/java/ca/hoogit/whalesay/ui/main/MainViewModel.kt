@@ -1,4 +1,4 @@
-package ca.hoogit.whalesay.ui
+package ca.hoogit.whalesay.ui.main
 
 import ca.hoogit.coreview.viewmodel.BaseViewModel
 import javax.inject.Inject

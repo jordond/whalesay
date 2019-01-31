@@ -33,7 +33,9 @@ class OnboardingFragment : BindableFragment<FragmentOnboardingBinding>() {
     }
 
     override fun subscribeViewModel() = with(viewModel) {
-        updateMicPermissionStatus(requireContext().microphonePermissionState)
+        // TODO - this should be extracted out to a Use-case
+        // We should be using the injected Context in a use-case to gather this information
+        initMicPermissionsStatus(requireContext().microphonePermissionState)
 
         state.observe(owner) { state ->
             state.event?.peek(::handleEvents)
@@ -60,8 +62,7 @@ class OnboardingFragment : BindableFragment<FragmentOnboardingBinding>() {
     }
 
     private fun renderRationalText(state: OnboardingState) = with(binding.txtPermissionRational) {
-        visibleOrGone = state.micState !is PermanentlyDenied &&
-            (state.micState is Denied || state.showRationalMessage)
+        visibleOrGone = state.micState !is PermanentlyDenied && state.showRationalMessage
     }
 
     private fun handleEvents(event: OnboardingEvents): Boolean = when (event) {

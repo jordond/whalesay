@@ -1,4 +1,4 @@
-package ca.hoogit.whalesay.ui
+package ca.hoogit.whalesay.ui.main
 
 import android.os.Bundle
 import androidx.navigation.NavDestination

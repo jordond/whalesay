@@ -2,6 +2,7 @@ package ca.hoogit.features.translate.util
 
 import ca.hoogit.ktx.repeat
 
+// TODO - Also strip out special characters (except .)
 object HumanToWhaleUtil {
 
     private val REGEX_CONSONANTS = Regex("[b-df-hj-np-tv-z]", RegexOption.IGNORE_CASE)

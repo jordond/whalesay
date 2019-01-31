@@ -6,6 +6,8 @@ import ca.hoogit.core.di.viewmodel.ViewModelKey
 import ca.hoogit.features.about.AboutFeatureModule
 import ca.hoogit.features.onboarding.OnboardingFeatureModule
 import ca.hoogit.features.translate.TranslateFeatureModule
+import ca.hoogit.whalesay.ui.main.MainActivity
+import ca.hoogit.whalesay.ui.main.MainViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

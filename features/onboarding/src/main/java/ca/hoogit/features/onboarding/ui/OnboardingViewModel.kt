@@ -49,7 +49,10 @@ class OnboardingViewModel @Inject constructor(
     ),
     update = update { state, action ->
         when (action) {
-            is UpdateMicPermission -> state.copy(micState = action.state)
+            is UpdateMicPermission -> state.copy(
+                micState = action.state,
+                showRationalMessage = action.state is Denied
+            )
             is OnboardingAction.ToggleRational ->
                 state.copy(showRationalMessage = !state.showRationalMessage)
             is DispatchEvent -> state.copy(event = action.event)
@@ -64,6 +67,22 @@ class OnboardingViewModel @Inject constructor(
         }
 
         dispatch(DispatchEvent(event))
+    }
+
+    /**
+     * Initialize the Mic state.
+     *
+     * By default with Android the permission is set to denied, but the user has never
+     * actually been prompted. So this will initialize the state with [Pending] if its [Denied],
+     * or else with the passed in status
+     *
+     * @param[status] Initial state of the microphone permission
+     */
+    fun initMicPermissionsStatus(status: MicPermissionState) {
+        if (currentState.micState !is Pending) return // Already initialized
+
+        val permission = if (status is Denied) Pending else status
+        updateMicPermissionStatus(permission)
     }
 
     fun updateMicPermissionStatus(status: MicPermissionState) {

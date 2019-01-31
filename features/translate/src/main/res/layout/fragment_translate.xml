@@ -10,6 +10,9 @@
 
     </data>
 
+
+    <!--TODO Maybe reverse the flow of the text views? so that stuff isn't popping up at the user-->
+    <!--IE make the human text on the bottom -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,7 +70,7 @@
             android:textColor="@color/colorAccent"
             android:gravity="top|start"
             android:visibility="gone"
-            android:minHeight="75dp"
+            android:minHeight="135dp"
             android:textSize="18sp"
             android:maxLines="7"
             android:layout_marginStart="32dp"
