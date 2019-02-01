@@ -4,6 +4,6 @@ include ':mobile',
         ':core:core-ktx',
         ':data:data-db',
         ':data:data-api',
-        ':features:onboarding',
-        ':features:about',
-        ':features:translate'
+        ':features:feature-onboarding',
+        ':features:feature-about',
+        ':features:feature-translate'

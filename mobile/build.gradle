@@ -1,7 +1,7 @@
 apply from: "${rootDir}/buildsystem/app.gradle"
 
 dependencies {
-    /* Library modules */
+    /* Core modules */
     implementation project(path: ':core:core')
     implementation project(path: ':core:core-view')
     implementation project(path: ':core:core-ktx')
@@ -10,7 +10,7 @@ dependencies {
     implementation project(path: ':data:data-db')
 
     /* Features modules */
-    implementation project(path: ':features:onboarding')
-    implementation project(path: ':features:translate')
-    implementation project(path: ':features:about')
+    implementation project(path: ':features:feature-onboarding')
+    implementation project(path: ':features:feature-translate')
+    implementation project(path: ':features:feature-about')
 }
