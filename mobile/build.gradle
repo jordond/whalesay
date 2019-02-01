@@ -8,6 +8,7 @@ dependencies {
 
     /* Data modules */
     implementation project(path: ':data:data-db')
+    implementation project(path: ':data:data-api')
 
     /* Features modules */
     implementation project(path: ':features:feature-onboarding')

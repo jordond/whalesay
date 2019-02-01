@@ -91,6 +91,10 @@ dependencies {
     implementation "com.xwray:groupie-databinding:$uiGroupie"
     implementation "com.xwray:groupie-kotlin-android-extensions:$uiGroupie"
 
+    /* Network */
+    implementation "com.squareup.retrofit2:retrofit:$networkRetrofit"
+    implementation "com.squareup.moshi:moshi:$networkMoshi"
+
     /* Misc */
     implementation "joda-time:joda-time:$miscJodaTime"
     implementation "com.github.quickpermissions:quickpermissions-kotlin:$miscQuickPermissions"
