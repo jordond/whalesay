@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import ca.hoogit.coreview.activity.BindableActivity
-import ca.hoogit.coreview.lib.HasFAB
-import ca.hoogit.coreview.util.onDestinationChanged
-import ca.hoogit.coreview.viewmodel.getViewModel
+import ca.hoogit.whalesay.coreview.activity.BindableActivity
+import ca.hoogit.whalesay.coreview.lib.HasFAB
+import ca.hoogit.whalesay.coreview.util.onDestinationChanged
+import ca.hoogit.whalesay.coreview.viewmodel.getViewModel
 import ca.hoogit.data.db.prefs.Prefs
 import ca.hoogit.whalesay.NavigationMobileDirections
 import ca.hoogit.whalesay.R

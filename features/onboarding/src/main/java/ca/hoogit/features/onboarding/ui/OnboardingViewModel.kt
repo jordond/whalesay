@@ -1,11 +1,11 @@
 package ca.hoogit.features.onboarding.ui
 
-import ca.hoogit.coreview.state.MicPermissionState
-import ca.hoogit.coreview.state.MicPermissionState.Denied
-import ca.hoogit.coreview.state.MicPermissionState.Granted
-import ca.hoogit.coreview.state.MicPermissionState.Pending
-import ca.hoogit.coreview.state.MicPermissionState.PermanentlyDenied
-import ca.hoogit.coreview.util.ktx.currentState
+import ca.hoogit.whalesay.coreview.state.MicPermissionState
+import ca.hoogit.whalesay.coreview.state.MicPermissionState.Denied
+import ca.hoogit.whalesay.coreview.state.MicPermissionState.Granted
+import ca.hoogit.whalesay.coreview.state.MicPermissionState.Pending
+import ca.hoogit.whalesay.coreview.state.MicPermissionState.PermanentlyDenied
+import ca.hoogit.whalesay.coreview.util.ktx.currentState
 import ca.hoogit.data.db.prefs.Prefs
 import ca.hoogit.features.onboarding.ui.OnboardingAction.DispatchEvent
 import ca.hoogit.features.onboarding.ui.OnboardingAction.UpdateMicPermission

@@ -1,21 +1,21 @@
 package ca.hoogit.features.onboarding.ui
 
 import androidx.navigation.fragment.findNavController
-import ca.hoogit.coreview.bindingadapters.visibleOrGone
-import ca.hoogit.coreview.fragment.BindableFragment
-import ca.hoogit.coreview.state.MicPermissionState
-import ca.hoogit.coreview.state.MicPermissionState.Denied
-import ca.hoogit.coreview.state.MicPermissionState.Granted
-import ca.hoogit.coreview.state.MicPermissionState.Pending
-import ca.hoogit.coreview.state.MicPermissionState.PermanentlyDenied
-import ca.hoogit.coreview.state.microphonePermissionState
-import ca.hoogit.coreview.state.requestMicrophonePermission
-import ca.hoogit.coreview.viewmodel.injectedViewModel
+import ca.hoogit.whalesay.coreview.bindingadapters.visibleOrGone
+import ca.hoogit.whalesay.coreview.fragment.BindableFragment
+import ca.hoogit.whalesay.coreview.state.MicPermissionState
+import ca.hoogit.whalesay.coreview.state.MicPermissionState.Denied
+import ca.hoogit.whalesay.coreview.state.MicPermissionState.Granted
+import ca.hoogit.whalesay.coreview.state.MicPermissionState.Pending
+import ca.hoogit.whalesay.coreview.state.MicPermissionState.PermanentlyDenied
+import ca.hoogit.whalesay.coreview.state.microphonePermissionState
+import ca.hoogit.whalesay.coreview.state.requestMicrophonePermission
+import ca.hoogit.whalesay.coreview.viewmodel.injectedViewModel
 import ca.hoogit.features.onboarding.R
 import ca.hoogit.features.onboarding.databinding.FragmentOnboardingBinding
 import ca.hoogit.features.onboarding.ui.OnboardingEvents.NavigateHome
 import ca.hoogit.features.onboarding.ui.OnboardingEvents.RequestAudioPermissions
-import ca.hoogit.ktx.onClick
+import ca.hoogit.whalesay.ktx.onClick
 import com.etiennelenhart.eiffel.state.extension.observe
 import com.etiennelenhart.eiffel.state.peek
 

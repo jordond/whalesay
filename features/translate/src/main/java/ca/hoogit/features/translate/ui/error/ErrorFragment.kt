@@ -1,14 +1,14 @@
 package ca.hoogit.features.translate.ui.error
 
 import androidx.navigation.fragment.findNavController
-import ca.hoogit.coreview.fragment.BindableFragment
-import ca.hoogit.coreview.viewmodel.injectedViewModel
+import ca.hoogit.whalesay.coreview.fragment.BindableFragment
+import ca.hoogit.whalesay.coreview.viewmodel.injectedViewModel
 import ca.hoogit.features.translate.R
 import ca.hoogit.features.translate.databinding.FragmentTranslateErrorBinding
 import ca.hoogit.features.translate.ui.error.state.ErrorBindingState
 import ca.hoogit.features.translate.ui.error.state.ErrorNavEvents
-import ca.hoogit.ktx.navArgs
-import ca.hoogit.ktx.onClick
+import ca.hoogit.whalesay.ktx.navArgs
+import ca.hoogit.whalesay.ktx.onClick
 import com.etiennelenhart.eiffel.binding.extension.observe
 import com.etiennelenhart.eiffel.state.peek
 

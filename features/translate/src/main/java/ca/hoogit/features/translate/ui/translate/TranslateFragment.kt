@@ -1,18 +1,18 @@
 package ca.hoogit.features.translate.ui.translate
 
-import ca.hoogit.coreview.bindingadapters.visible
-import ca.hoogit.coreview.bindingadapters.visibleOrGone
-import ca.hoogit.coreview.fragment.BindableFragment
-import ca.hoogit.coreview.state.canUseMic
-import ca.hoogit.coreview.state.microphonePermissionState
-import ca.hoogit.coreview.util.ktx.getProvidedFAB
-import ca.hoogit.coreview.viewmodel.injectedViewModel
+import ca.hoogit.whalesay.coreview.bindingadapters.visible
+import ca.hoogit.whalesay.coreview.bindingadapters.visibleOrGone
+import ca.hoogit.whalesay.coreview.fragment.BindableFragment
+import ca.hoogit.whalesay.coreview.state.canUseMic
+import ca.hoogit.whalesay.coreview.state.microphonePermissionState
+import ca.hoogit.whalesay.coreview.util.ktx.getProvidedFAB
+import ca.hoogit.whalesay.coreview.viewmodel.injectedViewModel
 import ca.hoogit.features.translate.R
 import ca.hoogit.features.translate.databinding.FragmentTranslateBinding
 import ca.hoogit.features.translate.ui.error.ErrorNavArgs
 import ca.hoogit.features.translate.ui.error.model.ErrorType
-import ca.hoogit.ktx.doAfterTextChanged
-import ca.hoogit.ktx.navigateTo
+import ca.hoogit.whalesay.ktx.doAfterTextChanged
+import ca.hoogit.whalesay.ktx.navigateTo
 import com.etiennelenhart.eiffel.state.extension.observe
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope

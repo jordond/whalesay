@@ -1,11 +1,11 @@
 package ca.hoogit.whalesay.ui
 
 import androidx.lifecycle.ViewModel
-import ca.hoogit.core.di.scopes.ActivityScoped
-import ca.hoogit.core.di.viewmodel.ViewModelKey
 import ca.hoogit.features.about.AboutFeatureModule
 import ca.hoogit.features.onboarding.OnboardingFeatureModule
 import ca.hoogit.features.translate.TranslateFeatureModule
+import ca.hoogit.whalesay.core.di.scopes.ActivityScoped
+import ca.hoogit.whalesay.core.di.viewmodel.ViewModelKey
 import ca.hoogit.whalesay.ui.main.MainActivity
 import ca.hoogit.whalesay.ui.main.MainViewModel
 import dagger.Binds

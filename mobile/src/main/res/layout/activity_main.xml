@@ -31,7 +31,7 @@
             style="@style/Toolbar"
             />
 
-        <ca.hoogit.coreview.views.NestedCoordinatorLayout
+        <ca.hoogit.whalesay.coreview.views.NestedCoordinatorLayout
             android:id="@+id/navHostContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,7 +49,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 />
 
-        </ca.hoogit.coreview.views.NestedCoordinatorLayout>
+        </ca.hoogit.whalesay.coreview.views.NestedCoordinatorLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnFAB"

@@ -1,8 +1,8 @@
 package ca.hoogit.features.translate.ui.error.di
 
 import androidx.lifecycle.ViewModel
-import ca.hoogit.core.di.scopes.FragmentScoped
-import ca.hoogit.core.di.viewmodel.ViewModelKey
+import ca.hoogit.whalesay.core.di.scopes.FragmentScoped
+import ca.hoogit.whalesay.core.di.viewmodel.ViewModelKey
 import ca.hoogit.features.translate.ui.error.ErrorFragment
 import ca.hoogit.features.translate.ui.error.ErrorViewModel
 import dagger.Binds

@@ -1,7 +1,7 @@
 package ca.hoogit.features.translate.ui.translate
 
-import ca.hoogit.coreview.state.MicPermissionState
-import ca.hoogit.coreview.util.ktx.currentState
+import ca.hoogit.whalesay.coreview.state.MicPermissionState
+import ca.hoogit.whalesay.coreview.util.ktx.currentState
 import ca.hoogit.features.translate.util.toWhalese
 import com.etiennelenhart.eiffel.state.Action
 import com.etiennelenhart.eiffel.state.State

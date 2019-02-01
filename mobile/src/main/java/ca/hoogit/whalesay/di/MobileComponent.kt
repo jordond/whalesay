@@ -1,6 +1,6 @@
 package ca.hoogit.whalesay.di
 
-import ca.hoogit.core.di.CoreModule
+import ca.hoogit.whalesay.core.di.CoreModule
 import ca.hoogit.data.db.DatabaseModule
 import ca.hoogit.whalesay.MainApplication
 import dagger.Component
