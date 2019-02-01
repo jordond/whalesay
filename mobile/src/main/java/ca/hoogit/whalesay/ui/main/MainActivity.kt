@@ -30,14 +30,13 @@ class MainActivity : BindableActivity<ActivityMainBinding>(), HasFAB {
 
     private val navController by lazy { navHostFragment.navController }
 
-    val fab by lazy { binding.btnFAB }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
     }
 
     override fun beforeSetup() {
+        // TODO - Move the onboarding to it's own activity
         if (!prefs.hasSeenOnboarding) {
             navController.navigate(NavigationMobileDirections.showOnboardingScreen())
         }
