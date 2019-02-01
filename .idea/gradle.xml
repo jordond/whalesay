@@ -9,7 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/data/db" />
+            <option value="$PROJECT_DIR$/data/data-api" />
+            <option value="$PROJECT_DIR$/data/data-db" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/about" />
             <option value="$PROJECT_DIR$/features/onboarding" />

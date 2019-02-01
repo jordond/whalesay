@@ -4,5 +4,5 @@ dependencies {
     implementation project(":modules:core")
     implementation project(":modules:coreview")
     implementation project(":modules:ktx")
-    implementation project(":data:db")
+    implementation project(":data:data-db")
 }
