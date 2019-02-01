@@ -8,7 +8,7 @@ import ca.hoogit.whalesay.coreview.activity.BindableActivity
 import ca.hoogit.whalesay.coreview.lib.HasFAB
 import ca.hoogit.whalesay.coreview.util.onDestinationChanged
 import ca.hoogit.whalesay.coreview.viewmodel.getViewModel
-import ca.hoogit.data.db.prefs.Prefs
+import ca.hoogit.whalesay.data.db.prefs.Prefs
 import ca.hoogit.whalesay.NavigationMobileDirections
 import ca.hoogit.whalesay.R
 import ca.hoogit.whalesay.databinding.ActivityMainBinding

@@ -9,7 +9,7 @@
 
         <variable
             name="state"
-            type="ca.hoogit.features.translate.ui.error.state.ErrorBindingState"
+            type="ca.hoogit.whalesay.features.translate.ui.error.state.ErrorBindingState"
             />
 
     </data>
