@@ -1,7 +1,7 @@
 package ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech
 
 import ca.hoogit.whalesay.data.api.api.googlecloud.GoogleCloudAPI
-import ca.hoogit.whalesay.data.api.api.googlecloud.GoogleCloudAPIKey
+import ca.hoogit.whalesay.data.api.api.googlecloud.GoogleCloudAuthOkHttp
 import ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.datasource.TextToSpeechDefaultDataSource
 import ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.datasource.TextToSpeechService
 import ca.hoogit.whalesay.data.api.di.NetworkModule
@@ -21,16 +21,10 @@ internal class TextToSpeechModule {
 
     @Provides @RetrofitGoogleTextToSpeech @Singleton
     fun provideTextToSpeechRetrofit(
-        okHttpBuilder: OkHttpClient.Builder,
-        @GoogleCloudAPIKey key: String,
+        @GoogleCloudAuthOkHttp client: OkHttpClient,
         moshi: Moshi
-    ): Retrofit {
-        val client = okHttpBuilder
-            .addInterceptor(GoogleCloudAPI.AddGoogleCloudKeyParamInterceptor(key))
-            .build()
-
-        return NetworkModule.createRetrofitClient(client, moshi, GoogleCloudAPI.URL_TEXT_TO_SPEECH)
-    }
+    ): Retrofit = NetworkModule
+        .createRetrofitClient(client, moshi, GoogleCloudAPI.URL_TEXT_TO_SPEECH)
 
     @Provides @Singleton
     fun provideTextToSpeechService(

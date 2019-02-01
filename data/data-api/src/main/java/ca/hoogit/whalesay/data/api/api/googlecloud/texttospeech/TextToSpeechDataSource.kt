@@ -6,8 +6,5 @@ import ca.hoogit.whalesay.data.api.network.APIResult
 
 interface TextToSpeechDataSource {
 
-    suspend fun synthesizeTextToSpeech(
-        apiKey: String,
-        body: TextToSpeechRequest
-    ): APIResult<TextToSpeechResponse>
+    suspend fun synthesizeTextToSpeech(body: TextToSpeechRequest): APIResult<TextToSpeechResponse>
 }

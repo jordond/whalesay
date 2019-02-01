@@ -9,8 +9,8 @@ class TextToSpeechDefaultDataSource @Inject constructor(
     private val textToSpeechService: TextToSpeechService
 ) : TextToSpeechDataSource {
 
-    override suspend fun synthesizeTextToSpeech(apiKey: String, body: TextToSpeechRequest) =
+    override suspend fun synthesizeTextToSpeech(body: TextToSpeechRequest) =
         textToSpeechService
-            .convertTextToSpeech(apiKey, body)
+            .convertTextToSpeech(body)
             .awaitResult()
 }
