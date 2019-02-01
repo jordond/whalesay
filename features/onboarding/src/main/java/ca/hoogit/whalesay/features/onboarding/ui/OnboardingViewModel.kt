@@ -1,11 +1,11 @@
 package ca.hoogit.whalesay.features.onboarding.ui
 
-import ca.hoogit.whalesay.coreview.state.MicPermissionState
-import ca.hoogit.whalesay.coreview.state.MicPermissionState.Denied
-import ca.hoogit.whalesay.coreview.state.MicPermissionState.Granted
-import ca.hoogit.whalesay.coreview.state.MicPermissionState.Pending
-import ca.hoogit.whalesay.coreview.state.MicPermissionState.PermanentlyDenied
-import ca.hoogit.whalesay.coreview.util.ktx.currentState
+import ca.hoogit.whalesay.core.view.state.MicPermissionState
+import ca.hoogit.whalesay.core.view.state.MicPermissionState.Denied
+import ca.hoogit.whalesay.core.view.state.MicPermissionState.Granted
+import ca.hoogit.whalesay.core.view.state.MicPermissionState.Pending
+import ca.hoogit.whalesay.core.view.state.MicPermissionState.PermanentlyDenied
+import ca.hoogit.whalesay.core.view.util.ktx.currentState
 import ca.hoogit.whalesay.data.db.prefs.Prefs
 import ca.hoogit.whalesay.features.onboarding.ui.OnboardingAction.DispatchEvent
 import ca.hoogit.whalesay.features.onboarding.ui.OnboardingAction.UpdateMicPermission

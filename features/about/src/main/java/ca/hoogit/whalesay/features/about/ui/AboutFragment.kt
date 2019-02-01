@@ -1,15 +1,15 @@
 package ca.hoogit.whalesay.features.about.ui
 
 import androidx.annotation.StringRes
-import ca.hoogit.whalesay.coreview.fragment.BindableFragment
-import ca.hoogit.whalesay.coreview.util.ktx.launchChromeTab
-import ca.hoogit.whalesay.coreview.viewmodel.injectedViewModel
+import ca.hoogit.whalesay.core.view.fragment.BindableFragment
+import ca.hoogit.whalesay.core.view.util.ktx.launchChromeTab
+import ca.hoogit.whalesay.core.view.viewmodel.injectedViewModel
 import ca.hoogit.whalesay.features.about.R
 import ca.hoogit.whalesay.features.about.databinding.FragmentAboutBinding
-import ca.hoogit.whalesay.ktx.launchViewIntent
-import ca.hoogit.whalesay.ktx.onClick
-import ca.hoogit.whalesay.ktx.showMessage
-import ca.hoogit.whalesay.ktx.util.openRateApp
+import ca.hoogit.whalesay.core.ktx.launchViewIntent
+import ca.hoogit.whalesay.core.ktx.onClick
+import ca.hoogit.whalesay.core.ktx.showMessage
+import ca.hoogit.whalesay.core.ktx.util.openRateApp
 
 internal class AboutFragment : BindableFragment<FragmentAboutBinding>() {
 

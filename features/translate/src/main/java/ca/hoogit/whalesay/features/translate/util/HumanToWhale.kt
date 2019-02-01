@@ -1,6 +1,6 @@
 package ca.hoogit.whalesay.features.translate.util
 
-import ca.hoogit.whalesay.ktx.repeat
+import ca.hoogit.whalesay.core.ktx.repeat
 
 // TODO - Also strip out special characters (except .)
 object HumanToWhaleUtil {

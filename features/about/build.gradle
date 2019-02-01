@@ -9,9 +9,9 @@ android {
 }
 
 dependencies {
-    implementation project(":modules:core")
-    implementation project(":modules:coreview")
-    implementation project(":modules:ktx")
+    implementation project(":core:core")
+    implementation project(":core:core-view")
+    implementation project(":core:core-ktx")
 }
 
 static def getGitHash() {

@@ -1,18 +1,18 @@
 package ca.hoogit.whalesay.features.translate.ui.translate
 
-import ca.hoogit.whalesay.coreview.bindingadapters.visible
-import ca.hoogit.whalesay.coreview.bindingadapters.visibleOrGone
-import ca.hoogit.whalesay.coreview.fragment.BindableFragment
-import ca.hoogit.whalesay.coreview.state.canUseMic
-import ca.hoogit.whalesay.coreview.state.microphonePermissionState
-import ca.hoogit.whalesay.coreview.util.ktx.getProvidedFAB
-import ca.hoogit.whalesay.coreview.viewmodel.injectedViewModel
+import ca.hoogit.whalesay.core.view.bindingadapters.visible
+import ca.hoogit.whalesay.core.view.bindingadapters.visibleOrGone
+import ca.hoogit.whalesay.core.view.fragment.BindableFragment
+import ca.hoogit.whalesay.core.view.state.canUseMic
+import ca.hoogit.whalesay.core.view.state.microphonePermissionState
+import ca.hoogit.whalesay.core.view.util.ktx.getProvidedFAB
+import ca.hoogit.whalesay.core.view.viewmodel.injectedViewModel
 import ca.hoogit.whalesay.features.translate.R
 import ca.hoogit.whalesay.features.translate.databinding.FragmentTranslateBinding
 import ca.hoogit.whalesay.features.translate.ui.error.ErrorNavArgs
 import ca.hoogit.whalesay.features.translate.ui.error.model.ErrorType
-import ca.hoogit.whalesay.ktx.doAfterTextChanged
-import ca.hoogit.whalesay.ktx.navigateTo
+import ca.hoogit.whalesay.core.ktx.doAfterTextChanged
+import ca.hoogit.whalesay.core.ktx.navigateTo
 import com.etiennelenhart.eiffel.state.extension.observe
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
