@@ -1,9 +1,9 @@
-package ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.datasource
+package ca.hoogit.whalesay.data.api.googlecloud.texttospeech.datasource
 
-import ca.hoogit.whalesay.data.api.api.googlecloud.GoogleCloudAPI
-import ca.hoogit.whalesay.data.api.api.googlecloud.GoogleCloudAPIModule
-import ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.model.TextToSpeechRequest
-import ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.model.TextToSpeechResponse
+import ca.hoogit.whalesay.data.api.googlecloud.GoogleCloudAPI
+import ca.hoogit.whalesay.data.api.googlecloud.GoogleCloudAPIModule
+import ca.hoogit.whalesay.data.api.googlecloud.texttospeech.model.TextToSpeechRequest
+import ca.hoogit.whalesay.data.api.googlecloud.texttospeech.model.TextToSpeechResponse
 import ca.hoogit.whalesay.data.api.network.APIResponse
 import retrofit2.http.Body
 import retrofit2.http.POST

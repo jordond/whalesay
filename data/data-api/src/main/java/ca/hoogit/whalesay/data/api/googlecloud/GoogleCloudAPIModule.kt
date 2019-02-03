@@ -1,7 +1,7 @@
-package ca.hoogit.whalesay.data.api.api.googlecloud
+package ca.hoogit.whalesay.data.api.googlecloud
 
 import ca.hoogit.whalesay.data.api.BuildConfig
-import ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.TextToSpeechModule
+import ca.hoogit.whalesay.data.api.googlecloud.texttospeech.TextToSpeechModule
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

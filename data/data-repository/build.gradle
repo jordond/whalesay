@@ -1,0 +1,7 @@
+apply from: "${rootDir}/buildsystem/module.gradle"
+
+dependencies {
+    implementation project(":core:core")
+    implementation project(":data:data-api")
+    implementation project(":data:data-db")
+}

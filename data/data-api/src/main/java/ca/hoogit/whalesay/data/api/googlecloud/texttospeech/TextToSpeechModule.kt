@@ -1,9 +1,9 @@
-package ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech
+package ca.hoogit.whalesay.data.api.googlecloud.texttospeech
 
-import ca.hoogit.whalesay.data.api.api.googlecloud.GoogleCloudAPI
-import ca.hoogit.whalesay.data.api.api.googlecloud.GoogleCloudAuthOkHttp
-import ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.datasource.TextToSpeechDefaultDataSource
-import ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.datasource.TextToSpeechService
+import ca.hoogit.whalesay.data.api.googlecloud.GoogleCloudAPI
+import ca.hoogit.whalesay.data.api.googlecloud.GoogleCloudAuthOkHttp
+import ca.hoogit.whalesay.data.api.googlecloud.texttospeech.datasource.TextToSpeechDefaultDataSource
+import ca.hoogit.whalesay.data.api.googlecloud.texttospeech.datasource.TextToSpeechService
 import ca.hoogit.whalesay.data.api.di.NetworkModule
 import com.squareup.moshi.Moshi
 import dagger.Module

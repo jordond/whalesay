@@ -4,4 +4,5 @@ dependencies {
     implementation project(":core:core")
     implementation project(":core:core-view")
     implementation project(":core:core-ktx")
+    implementation project(":data:data-repository")
 }

@@ -1,4 +1,4 @@
-package ca.hoogit.whalesay.data.api.api.googlecloud
+package ca.hoogit.whalesay.data.api.googlecloud
 
 import okhttp3.Interceptor
 import okhttp3.Response

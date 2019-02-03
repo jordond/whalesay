@@ -1,4 +1,4 @@
-package ca.hoogit.whalesay.data.api.api.googlecloud.texttospeech.model
+package ca.hoogit.whalesay.data.api.googlecloud.texttospeech.model
 
 data class TextToSpeechRequest(
     val input: VoiceInput,

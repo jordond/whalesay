@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/data-api" />
             <option value="$PROJECT_DIR$/data/data-db" />
+            <option value="$PROJECT_DIR$/data/data-repository" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/feature-about" />
             <option value="$PROJECT_DIR$/features/feature-onboarding" />
