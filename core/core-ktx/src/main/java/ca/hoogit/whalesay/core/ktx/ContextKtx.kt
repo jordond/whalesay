@@ -1,9 +1,11 @@
 package ca.hoogit.whalesay.core.ktx
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.net.ConnectivityManager
 import android.transition.Transition
 import android.transition.TransitionInflater
 import android.view.inputmethod.InputMethodManager
@@ -62,3 +64,12 @@ fun Context.launchViewIntent(url: String) = try {
     e(error) { "Unable to launch view intent" }
     false
 }
+
+@SuppressLint("MissingPermission")
+fun Context.hasInternet(): Boolean =
+    (getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager)
+        ?.activeNetworkInfo
+        ?.isConnected
+        ?: false
+
+fun Context.hasNoInternet(): Boolean = !hasInternet()

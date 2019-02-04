@@ -1,6 +1,6 @@
 package ca.hoogit.whalesay.data.api.util
 
-import ca.hoogit.whalesay.data.api.network.APIResult
+import ca.hoogit.whalesay.core.network.APIResult
 import kotlinx.coroutines.Deferred
 import retrofit2.HttpException
 import retrofit2.Response

@@ -24,7 +24,7 @@ internal abstract class MainModule {
             AboutFeatureModule::class
         ]
     )
-    internal abstract fun mainActivity(): MainActivity
+    abstract fun mainActivity(): MainActivity
 
     @Binds @IntoMap
     @ViewModelKey(MainViewModel::class)

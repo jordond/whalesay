@@ -1,7 +1,6 @@
-package ca.hoogit.whalesay.data.api.network
+package ca.hoogit.whalesay.core.network
 
-import ca.hoogit.whalesay.core.network.HttpCode
-import ca.hoogit.whalesay.data.api.network.APIResult.Success
+import ca.hoogit.whalesay.core.network.APIResult.Success
 import okhttp3.Response
 
 /**

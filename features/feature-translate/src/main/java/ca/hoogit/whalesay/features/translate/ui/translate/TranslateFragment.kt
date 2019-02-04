@@ -1,5 +1,8 @@
 package ca.hoogit.whalesay.features.translate.ui.translate
 
+import ca.hoogit.whalesay.core.ktx.doAfterTextChanged
+import ca.hoogit.whalesay.core.ktx.navigateTo
+import ca.hoogit.whalesay.core.ktx.onClick
 import ca.hoogit.whalesay.core.view.bindingadapters.visible
 import ca.hoogit.whalesay.core.view.bindingadapters.visibleOrGone
 import ca.hoogit.whalesay.core.view.fragment.BindableFragment
@@ -11,9 +14,8 @@ import ca.hoogit.whalesay.features.translate.R
 import ca.hoogit.whalesay.features.translate.databinding.FragmentTranslateBinding
 import ca.hoogit.whalesay.features.translate.ui.error.ErrorNavArgs
 import ca.hoogit.whalesay.features.translate.ui.error.model.ErrorType
-import ca.hoogit.whalesay.core.ktx.doAfterTextChanged
-import ca.hoogit.whalesay.core.ktx.navigateTo
 import com.etiennelenhart.eiffel.state.extension.observe
+import com.etiennelenhart.eiffel.state.peek
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,10 +32,14 @@ class TranslateFragment : BindableFragment<FragmentTranslateBinding>(), Coroutin
 
     private val viewModel by injectedViewModel<TranslateViewModel>()
 
+    private val fab by lazy { getProvidedFAB() }
+
     override fun setupViews() = with(binding) {
         txtTextInput.doAfterTextChanged { editable ->
             viewModel.updateHumanText(editable?.toString())
         }
+
+        fab?.onClick { viewModel.onFabClicked() }
 
         Unit
     }
@@ -44,7 +50,9 @@ class TranslateFragment : BindableFragment<FragmentTranslateBinding>(), Coroutin
 
         state.observe(owner) { state ->
             renderWhaleTextBox(state)
-            getProvidedFAB()?.let { renderFAB(it, state) }
+            fab?.let { renderFAB(it, state) }
+
+            state.errorEvent?.peek { showErrorScreen(it.type) }
         }
     }
 
@@ -68,10 +76,12 @@ class TranslateFragment : BindableFragment<FragmentTranslateBinding>(), Coroutin
         if (imgRes != null) fab.show() else fab.hide()
     }
 
-    private fun showErrorScreen(error: ErrorType) {
+    private fun showErrorScreen(error: ErrorType): Boolean {
         navigateTo {
             TranslateFragmentDirections.showErrorScreen(ErrorNavArgs(error))
         }
+
+        return true
     }
 
     override fun onDestroy() {

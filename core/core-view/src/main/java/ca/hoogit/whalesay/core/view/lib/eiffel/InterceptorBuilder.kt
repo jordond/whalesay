@@ -10,6 +10,7 @@ import com.etiennelenhart.eiffel.interception.command.LiveCommand
 import com.etiennelenhart.eiffel.interception.command.LiveReaction
 import com.etiennelenhart.eiffel.interception.command.Reaction
 import com.etiennelenhart.eiffel.interception.command.command
+import com.etiennelenhart.eiffel.interception.command.consuming
 import com.etiennelenhart.eiffel.interception.command.liveCommand
 import com.etiennelenhart.eiffel.interception.filter
 import com.etiennelenhart.eiffel.interception.pipe
@@ -30,7 +31,7 @@ class InterceptorBuilder<S : State, A : Action> {
      *
      * Once the building is done call [toList] to retrieve an immutable version of [interceptions].
      */
-    private val interceptions = mutableListOf<Interception<S, A>>()
+    val interceptions = mutableListOf<Interception<S, A>>()
 
     /**
      * Add a [Filter] to the [interceptions]. Passes [predicate] to the [filter] convenience function.
@@ -46,7 +47,7 @@ class InterceptorBuilder<S : State, A : Action> {
      * @param[predicate] Lambda expression to be passed to [filter].
      * @return Instance of [InterceptorBuilder].
      */
-    fun addFilter(predicate: suspend (state: S, action: A) -> Boolean) = this.apply {
+    fun addFilter(predicate: (state: S, action: A) -> Boolean) = apply {
         interceptions.add(filter(predicate))
     }
 
@@ -77,9 +78,9 @@ class InterceptorBuilder<S : State, A : Action> {
      * @return Instance of [InterceptorBuilder].
      */
     fun addPipe(
-        before: suspend (state: S, action: A) -> Unit = { _, _ -> },
-        after: suspend (state: S, action: A) -> Unit = { _, _ -> }
-    ) = this.apply { interceptions.add(pipe(before, after)) }
+        before: (state: S, action: A) -> Unit = { _, _ -> },
+        after: (state: S, action: A?) -> Unit = { _, _ -> }
+    ) = apply { interceptions.add(pipe(before, after)) }
 
     /**
      * Add a [Pipe] targeting a specific [Action] to [interceptions].
@@ -103,11 +104,11 @@ class InterceptorBuilder<S : State, A : Action> {
      * @return Instance of [InterceptorBuilder].
      */
     inline fun <reified T : A> addPipeOn(
-        crossinline before: suspend A.(state: S) -> Unit = {},
-        crossinline after: suspend A.(state: S) -> Unit = {}
+        crossinline before: (state: S, action: A) -> Unit = { _, _ -> },
+        crossinline after: (state: S, action: A?) -> Unit = { _, _ -> }
     ) = addPipe(
-        before = { state, action -> if (action is T) before(action, state) },
-        after = { state, action -> if (action is T) after(action, state) }
+        before = { state, action -> if (action is T) before(state, action) },
+        after = { state, action -> if (action is T) after(state, action) }
     )
 
     /**
@@ -126,7 +127,7 @@ class InterceptorBuilder<S : State, A : Action> {
      * @param[before] Lambda expression called with the current [State] and received [Action].
      * @return Instance of [InterceptorBuilder].
      */
-    fun addPipeBefore(before: suspend (state: S, action: A) -> Unit) = addPipe(before = before)
+    fun addPipeBefore(before: (state: S, action: A) -> Unit) = addPipe(before = before)
 
     /**
      * Add an after [Pipe].
@@ -142,7 +143,7 @@ class InterceptorBuilder<S : State, A : Action> {
      * @param[after] Lambda expression called with the current [State] and updated [Action] from next item.
      * @return Instance of [InterceptorBuilder].
      */
-    fun addPipeAfter(after: suspend (state: S, action: A) -> Unit) = addPipe(after = after)
+    fun addPipeAfter(after: (state: S, action: A?) -> Unit) = addPipe(after = after)
 
     /**
      * Add an [Adapter] to [interceptions], passes [adapt] lambda to [adapter].
@@ -159,7 +160,7 @@ class InterceptorBuilder<S : State, A : Action> {
      * @param[adapt] Lambda expression that adapts the given [Action] to a new one.
      * @return Instance of [InterceptorBuilder].
      */
-    fun addAdapter(adapt: (action: A) -> A) = this.apply {
+    fun addAdapter(adapt: (action: A) -> A) = apply {
         interceptions.add(adapter(adapt))
     }
 
@@ -170,8 +171,20 @@ class InterceptorBuilder<S : State, A : Action> {
      * @param[react] Lambda expression called with the received [Action]. Return either [Reaction.Consuming] or [Reaction.Ignoring].
      * @return Instance of [InterceptorBuilder].
      */
-    fun addCommand(react: (action: A) -> Reaction<S, A>) = this.apply {
+    fun addCommand(react: (action: A) -> Reaction<S, A>) = apply {
         interceptions.add(command(react))
+    }
+
+    inline fun <reified T : A> addCommandOn(
+        immediateAction: A,
+        noinline block: suspend (state: S, action: A, dispatch: (A) -> Unit) -> Unit
+    ) {
+        val command = command<S, A> { action ->
+            if (action is T) consuming(immediateAction, block)
+            else Reaction.Ignoring()
+        }
+
+        interceptions.add(command)
     }
 
     /**
@@ -181,7 +194,7 @@ class InterceptorBuilder<S : State, A : Action> {
      * @param[react] Lambda expression called with the received [Action]. Return either [LiveReaction.Consuming] or [LiveReaction.Ignoring].
      * @return Instance of [InterceptorBuilder].
      */
-    fun addLiveCommand(react: (action: A) -> LiveReaction<S, A>) = this.apply {
+    fun addLiveCommand(react: (action: A) -> LiveReaction<S, A>) = apply {
         interceptions.add(liveCommand(react))
     }
 
