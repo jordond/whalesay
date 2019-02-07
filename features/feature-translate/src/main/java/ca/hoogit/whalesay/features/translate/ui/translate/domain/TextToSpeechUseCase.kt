@@ -1,5 +1,7 @@
 package ca.hoogit.whalesay.features.translate.ui.translate.domain
 
+import android.content.Context
+import ca.hoogit.whalesay.core.ktx.hasNoInternet
 import ca.hoogit.whalesay.core.network.APIResult
 import ca.hoogit.whalesay.core.network.isClientError
 import ca.hoogit.whalesay.core.network.isServerError
@@ -8,8 +10,8 @@ import ca.hoogit.whalesay.features.translate.ui.error.model.ErrorType
 import javax.inject.Inject
 
 class TextToSpeechUseCase @Inject constructor(
-    private val textToSpeechRepository: TextToSpeechRepository
-//    private val context: Context
+    private val textToSpeechRepository: TextToSpeechRepository,
+    private val context: Context
 ) {
 
     /**
@@ -21,7 +23,7 @@ class TextToSpeechUseCase @Inject constructor(
      */
     @Throws
     suspend fun translateText(text: String): String {
-//        if (context.hasNoInternet()) throw TextToSpeechException(ErrorType.Network)
+        if (context.hasNoInternet()) throw TextToSpeechException(ErrorType.Network)
 
         val result = textToSpeechRepository.translateTextToSpeech(text)
 

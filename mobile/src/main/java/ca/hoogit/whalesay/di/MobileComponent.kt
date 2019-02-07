@@ -18,6 +18,7 @@ import javax.inject.Singleton
         CoreModule::class,
         DatabaseModule::class,
         APIModule::class,
+        MobileModule::class,
         ActivityBindingModule::class
     ]
 )

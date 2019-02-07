@@ -1,6 +1,7 @@
 package ca.hoogit.whalesay.data.api.googlecloud
 
 import ca.hoogit.whalesay.data.api.BuildConfig
+import ca.hoogit.whalesay.data.api.googlecloud.speechtotext.SpeechToTextModule
 import ca.hoogit.whalesay.data.api.googlecloud.texttospeech.TextToSpeechModule
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,8 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
-        TextToSpeechModule::class
+        TextToSpeechModule::class,
+        SpeechToTextModule::class
     ]
 )
 internal class GoogleCloudAPIModule {

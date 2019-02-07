@@ -1,7 +1,7 @@
 buildscript {
     ext {
         // Build
-        gradle = '3.4.0-beta03'
+        gradle = '3.3.0'
         kotlinVersion = '1.3.20'
         kotlinCoroutines = '1.1.0'
         dokka = '0.9.17'
@@ -51,6 +51,7 @@ buildscript {
         // UI
         uiGroupie = '2.3.0'
         uiEiffel = 'master-SNAPSHOT'
+        uiEiffelAlt = 'feature-simple-debug-mode-SNAPSHOT'
 
         // Misc
         miscQuickPermissions = '0.4.0'
