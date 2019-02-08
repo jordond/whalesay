@@ -1,0 +1,64 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-28-alpha
+        environment:
+          JAVA_OPTS: -Xmx1536m
+          GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx1536m -XX:+HeapDumpOnOutOfMemoryError"'
+    steps:
+      - checkout
+      - restore_cache:
+        key: sdks-licenses-build-tools-extras-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          key: sdks-licenses-build-tools-extras-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+          paths:
+          - /opt/android/sdk/licenses
+          - /opt/android/sdk/build-tools
+          - /opt/android/sdk/extras
+      - save_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+          paths:
+          - ~/.gradle
+      - run:
+          name: decrypt secrets
+          command: |
+              if is_on_master_or_release; then
+                  ./secrets/secrets.sh $DECRYPT_SECRETS_PASSWORD
+              fi
+      - run:
+          name: Check
+          command: |
+              if ! is_on_master_or_release; then
+                  ./gradlew --stacktrace lint${APP_BUILD_TYPE^}
+                  ./gradlew --stacktrace ktlint${APP_BUILD_TYPE^}Check
+                  bundle exec danger
+              fi
+      - run:
+          name: Test
+          command: |
+              if is_on_master_or_release; then
+                  ./gradlew --stacktrace testRelease
+              else
+                  ./gradlew --stacktrace test${APP_BUILD_TYPE^}
+              fi
+      - run:
+          name: Build
+          command: |
+              if is_on_master_or_release; then
+                  ./gradlew --offline --stacktrace assembleRelease
+              else
+                  ./gradlew --offline --stacktrace assemble${APP_BUILD_TYPE^}
+              fi
+      - store_artifacts:
+          path: mobile/build/reports
+          destination: reports
+      - store_artifacts:
+          path: mobile/build/outputs/apk
+          destination: apk

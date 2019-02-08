@@ -1,0 +1,3 @@
+is_on_master_or_release() {
+    [[ "${CIRCLE_BRANCH:-undefined}" =~ ^(master|release)$ ]]
+}
