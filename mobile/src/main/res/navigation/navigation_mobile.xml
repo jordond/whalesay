@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="ca.hoogit.whalesay.features.about.ui.AboutFragment"
+        android:name="com.worldturtlemedia.whalesay.features.about.ui.AboutFragment"
         android:label=" "
         tools:layout="@layout/fragment_about"
         />
@@ -26,7 +26,7 @@
         app:popExitAnim="@anim/slide_out_right"/>
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="ca.hoogit.whalesay.features.onboarding.ui.OnboardingFragment"
+        android:name="com.worldturtlemedia.whalesay.features.onboarding.ui.OnboardingFragment"
         android:label="Onboarding"
         tools:layout="@layout/fragment_onboarding"
         />

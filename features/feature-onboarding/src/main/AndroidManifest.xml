@@ -1,6 +1,6 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ca.hoogit.whalesay.features.onboarding"
+    package="com.worldturtlemedia.whalesay.features.onboarding"
     >
 
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>

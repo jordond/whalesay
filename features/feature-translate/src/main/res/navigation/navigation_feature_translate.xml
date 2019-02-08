@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/translateFragment"
-        android:name="ca.hoogit.whalesay.features.translate.ui.translate.TranslateFragment"
+        android:name="com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateFragment"
         android:label=" "
         tools:layout="@layout/fragment_translate"
         >
@@ -25,13 +25,13 @@
 
     <fragment
         android:id="@+id/errorFragment"
-        android:name="ca.hoogit.whalesay.features.translate.ui.error.ErrorFragment"
+        android:name="com.worldturtlemedia.whalesay.features.translate.ui.error.ErrorFragment"
         android:label=" "
         tools:layout="@layout/fragment_translate_error"
         >
         <argument
             android:name="data"
-            app:argType="ca.hoogit.whalesay.features.translate.ui.error.ErrorNavArgs"/>
+            app:argType="com.worldturtlemedia.whalesay.features.translate.ui.error.ErrorNavArgs"/>
     </fragment>
 
 </navigation>
