@@ -1,5 +1,12 @@
 package com.worldturtlemedia.whalesay.features.translate.ui.translate
 
+import com.etiennelenhart.eiffel.state.Action
+import com.etiennelenhart.eiffel.state.State
+import com.etiennelenhart.eiffel.state.ViewEvent
+import com.etiennelenhart.eiffel.state.update
+import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
+import com.github.ajalt.timberkt.d
+import com.worldturtlemedia.whalesay.core.ktx.isNotNullOrNotEmpty
 import com.worldturtlemedia.whalesay.core.view.lib.eiffel.buildInterceptors
 import com.worldturtlemedia.whalesay.core.view.state.MicPermissionState
 import com.worldturtlemedia.whalesay.core.view.state.canUseMic
@@ -9,15 +16,10 @@ import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAc
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.Loading
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextToSpeech
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextToSpeechAudio
+import com.worldturtlemedia.whalesay.features.translate.ui.translate.domain.EncodedAudioString
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.domain.TextToSpeechException
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.domain.TextToSpeechUseCase
 import com.worldturtlemedia.whalesay.features.translate.util.toWhalese
-import com.etiennelenhart.eiffel.state.Action
-import com.etiennelenhart.eiffel.state.State
-import com.etiennelenhart.eiffel.state.ViewEvent
-import com.etiennelenhart.eiffel.state.update
-import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
-import com.github.ajalt.timberkt.d
 import javax.inject.Inject
 
 data class TranslateError(val type: ErrorType) : ViewEvent()
@@ -27,7 +29,7 @@ data class TranslateState(
     val micPermissionState: MicPermissionState = MicPermissionState.Pending,
     val humanText: String = "",
     val whaleText: String = "",
-    val audioData: String = "",
+    val audioData: EncodedAudioString? = null,
     val errorEvent: TranslateError? = null,
     val isPlaying: Boolean = false,
     val isLoading: Boolean = false,
@@ -38,7 +40,7 @@ sealed class TranslateAction : Action {
     data class Init(val state: MicPermissionState) : TranslateAction()
     data class TextEntered(val text: String) : TranslateAction()
     data class Error(val type: ErrorType) : TranslateAction()
-    data class TextToSpeechAudio(val data: String) : TranslateAction()
+    data class TextToSpeechAudio(val data: EncodedAudioString) : TranslateAction()
     object TextToSpeech : TranslateAction()
     object Loading : TranslateAction()
 }
@@ -95,7 +97,7 @@ class TranslateViewModel @Inject constructor(
             isPlaying -> d { "STOP THE MUSIC" }
             isRecording -> d { "STOP RECORDING" }
             whaleText.isNotEmpty() -> dispatch(TranslateAction.TextToSpeech)
-            audioData.isNotEmpty() -> d { "PLAY SOME WHALE TEXT" }
+            audioData?.data.isNotNullOrNotEmpty() -> d { "PLAY SOME WHALE TEXT" }
             micPermissionState.canUseMic && !isRecording -> d { "START RECORDING" }
         }
     }

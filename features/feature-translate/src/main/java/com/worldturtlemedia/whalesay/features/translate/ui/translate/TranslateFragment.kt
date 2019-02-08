@@ -17,18 +17,10 @@ import com.worldturtlemedia.whalesay.features.translate.R
 import com.worldturtlemedia.whalesay.features.translate.databinding.FragmentTranslateBinding
 import com.worldturtlemedia.whalesay.features.translate.ui.error.ErrorNavArgs
 import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlin.coroutines.CoroutineContext
 
-class TranslateFragment : BindableFragment<FragmentTranslateBinding>(), CoroutineScope {
+class TranslateFragment : BindableFragment<FragmentTranslateBinding>() {
 
     override fun getLayoutRes(): Int = R.layout.fragment_translate
-
-    private val job = SupervisorJob()
-
-    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
 
     private val viewModel by injectedViewModel<TranslateViewModel>()
 
@@ -82,10 +74,5 @@ class TranslateFragment : BindableFragment<FragmentTranslateBinding>(), Coroutin
         }
 
         return true
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        job.cancel()
     }
 }
