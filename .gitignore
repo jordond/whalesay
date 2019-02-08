@@ -31,4 +31,10 @@ build/
 captures/
 output.json
 
-secrets/*.properties
+.project
+
+secrets/backup
+private_key.pepk
+secrets.properties
+whalesay.keystore
+mobile/google-services.json

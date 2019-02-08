@@ -6,9 +6,14 @@ buildscript {
         kotlinCoroutines = '1.1.0'
         dokka = '0.9.17'
 
+        // Version
+        appVersionMajor = 1
+        appVersionMinor = 0
+        appVersionPatch = 0
+        applicationVersionCode = appVersionMajor * 10000 + appVersionMinor * 100 + appVersionPatch
+        applicationVersionName = "$appVersionMajor.$appVersionMinor.$appVersionPatch"
+
         appApplicationId = "ca.hoogit.whalesay"
-        applicationVersionCode = 1
-        applicationVersionName = "1.0.0"
         androidTargetSdkVersion = 28
         androidMinimumSdkVersion = 21
         suffixDebug = "dev"
