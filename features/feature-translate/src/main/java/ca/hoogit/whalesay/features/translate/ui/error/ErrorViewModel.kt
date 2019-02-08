@@ -13,10 +13,10 @@ sealed class ErrorAction : Action {
     data class Navigate(val type: ErrorNavEvents) : ErrorAction()
 }
 
-private val updater = update<ErrorState, ErrorAction> { state, action ->
+private val updater = update<ErrorState, ErrorAction> { action ->
     when (action) {
-        is ErrorAction.Init -> state.copy(type = action.type)
-        is ErrorAction.Navigate -> state.copy(navEvent = action.type)
+        is ErrorAction.Init -> copy(type = action.type)
+        is ErrorAction.Navigate -> copy(navEvent = action.type)
     }
 }
 

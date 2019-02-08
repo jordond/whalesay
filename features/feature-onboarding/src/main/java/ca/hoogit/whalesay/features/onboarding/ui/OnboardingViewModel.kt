@@ -47,15 +47,14 @@ class OnboardingViewModel @Inject constructor(
     interceptions = listOf(
         onNavigateUpdatePrefs(prefs)
     ),
-    update = update { state, action ->
+    update = update { action ->
         when (action) {
-            is UpdateMicPermission -> state.copy(
+            is UpdateMicPermission -> copy(
                 micState = action.state,
                 showRationalMessage = action.state is Denied
             )
-            is OnboardingAction.ToggleRational ->
-                state.copy(showRationalMessage = !state.showRationalMessage)
-            is DispatchEvent -> state.copy(event = action.event)
+            is OnboardingAction.ToggleRational -> copy(showRationalMessage = !showRationalMessage)
+            is DispatchEvent -> copy(event = action.event)
         }
     }
 ) {

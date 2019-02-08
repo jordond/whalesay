@@ -47,20 +47,20 @@ class TranslateViewModel @Inject constructor(
     textToSpeechUseCase: TextToSpeechUseCase
 ) : EiffelViewModel<TranslateState, TranslateAction>(
     initialState = TranslateState(),
-    update = update { state, action ->
+    update = update { action ->
         when (action) {
-            is TranslateAction.Init -> state.copy(
+            is TranslateAction.Init -> copy(
                 initialized = true,
                 micPermissionState = action.state
             )
-            is TranslateAction.TextEntered -> state.copy(
+            is TranslateAction.TextEntered -> copy(
                 humanText = action.text,
                 whaleText = action.text.toWhalese()
             )
-            is TextToSpeechAudio -> state.copy(isLoading = false, audioData = action.data)
-            is Loading -> state.copy(isLoading = true)
-            is Error -> state.copy(isLoading = false, errorEvent = TranslateError(action.type))
-            else -> state
+            is TextToSpeechAudio -> copy(isLoading = false, audioData = action.data)
+            is Loading -> copy(isLoading = true)
+            is Error -> copy(isLoading = false, errorEvent = TranslateError(action.type))
+            else -> this
         }
     },
     interceptions = buildInterceptors {

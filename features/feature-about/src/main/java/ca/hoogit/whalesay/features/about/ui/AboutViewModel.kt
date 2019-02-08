@@ -1,16 +1,19 @@
 package ca.hoogit.whalesay.features.about.ui
 
+import ca.hoogit.whalesay.features.about.util.AppInfo
 import com.etiennelenhart.eiffel.state.Action
+import com.etiennelenhart.eiffel.state.State
 import com.etiennelenhart.eiffel.state.update
 import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
 import javax.inject.Inject
 
+data class AboutState(
+    val info: AppInfo = AppInfo()
+) : State
+
 sealed class AboutAction : Action
 
-private val updater = update<AboutState, AboutAction> { state, _ -> state }
-
-internal class AboutViewModel @Inject constructor() :
-    EiffelViewModel<AboutState, AboutAction>(
-        initialState = AboutState(),
-        update = updater
-    )
+internal class AboutViewModel @Inject constructor() : EiffelViewModel<AboutState, AboutAction>(
+    initialState = AboutState(),
+    update = update { this }
+)
