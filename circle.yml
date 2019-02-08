@@ -21,11 +21,8 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "mobile/build.gradle" }}
       - run:
-          name: decrypt secrets
-          command: |
-              if [ $CIRCLE_BRANCH = 'master' ] || [ $CIRCLE_BRANCH = 'develop' ]; then
-                  ./secrets/secrets.sh decrypt $DECRYPT_SECRETS_PASSWORD
-              fi
+          name: Decrypt secrets
+          command: ./secrets/secrets.sh decrypt $DECRYPT_SECRETS_PASSWORD
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
