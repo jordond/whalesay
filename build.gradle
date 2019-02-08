@@ -55,8 +55,8 @@ buildscript {
 
         // UI
         uiGroupie = '2.3.0'
-        uiEiffelUrl = 'com.github.etiennelenhart:Eiffel'
-        uiEiffel = 'master-SNAPSHOT'
+        uiEiffelUrl = 'com.github.jordond:Eiffel'
+        uiEiffel = 'fix-log-output-SNAPSHOT'
 
         // Misc
         miscQuickPermissions = '0.4.0'
