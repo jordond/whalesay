@@ -89,7 +89,7 @@ dependencies {
     implementation "com.chibatching.kotpref:initializer:$prefsKotpref"
 
     /* UI */
-    implementation "$uiEiffelUrl:$uiEiffelAlt"
+    implementation "$uiEiffelUrl:$uiEiffel"
 
     implementation "com.xwray:groupie:$uiGroupie"
     implementation "com.xwray:groupie-databinding:$uiGroupie"
