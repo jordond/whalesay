@@ -100,15 +100,12 @@ class InterceptorBuilder<S : State, A : Action> {
      * @see addPipe
      * @param[T] Specific [Action] you want to target.
      * @param[before] Lambda expression called with the current [State] and scoped to received [Action].
-     * @param[after] Lambda expression called with the current [State] and scoped to the updated [Action] from next item.
      * @return Instance of [InterceptorBuilder].
      */
     inline fun <reified T : A> addPipeOn(
-        crossinline before: (state: S, action: A) -> Unit = { _, _ -> },
-        crossinline after: (state: S, action: A?) -> Unit = { _, _ -> }
+        crossinline before: (state: S, action: T) -> Unit = { _, _ -> }
     ) = addPipe(
-        before = { state, action -> if (action is T) before(state, action) },
-        after = { state, action -> if (action is T) after(state, action) }
+        before = { state, action -> if (action is T) before(state, action) }
     )
 
     /**

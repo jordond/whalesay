@@ -1,5 +1,6 @@
 package com.worldturtlemedia.whalesay.data.api.util
 
+import com.github.ajalt.timberkt.d
 import com.worldturtlemedia.whalesay.core.network.APIResult
 import kotlinx.coroutines.Deferred
 import retrofit2.HttpException
@@ -22,7 +23,12 @@ suspend inline fun <RESPONSE, RESULT> Deferred<Response<RESPONSE>>.awaitResult(
             APIResult.Error(HttpException(response), response.raw())
         }
     } catch (err: Exception) {
-        APIResult.Error(IOException("Error await request", err))
+        APIResult.Error(IOException("Error awaiting the API request", err))
+    }.also { result ->
+        if (result is APIResult.Error) {
+            val url = result.response?.request()?.url() ?: return@also
+            d { "Request to -> $url failed" }
+        }
     }
 }
 
