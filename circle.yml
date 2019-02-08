@@ -64,7 +64,7 @@ jobs:
                   ./gradlew bundleRelease
               elif [ $CIRCLE_BRANCH = 'develop' ]; then
                   ./gradlew assembleBeta
-                  ./grdalew bundleBeta
+                  ./gradlew bundleBeta
               else
                   ./gradlew assembleDebug
               fi
