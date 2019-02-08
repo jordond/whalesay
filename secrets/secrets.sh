@@ -1,7 +1,11 @@
 #!/bin/bash
 
 CWD="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-PARENT="$(cd .. >/dev/null 2>&1 && pwd)"
+PARENT="$(cd $CWD/.. >/dev/null 2>&1 && pwd)"
+
+echo "Initializing script..."
+echo "CWD: $CWD"
+echo "ROOT: $PARENT"
 
 function showUsage() {
   echo -e "Usage:\n\t./secrets <encrypt|decrypt> [opts]"
@@ -25,6 +29,8 @@ function crypto() {
     echo "Exiting..."
     exit 1
   fi
+
+  echo "Processed: $3 -> $4"
 }
 
 function decrypt() {

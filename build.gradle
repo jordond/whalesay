@@ -55,6 +55,7 @@ buildscript {
 
         // UI
         uiGroupie = '2.3.0'
+        uiEiffelUrl = 'com.github.jordond:Eiffel'
         uiEiffel = 'master-SNAPSHOT'
         uiEiffelAlt = 'feature-simple-debug-mode-SNAPSHOT'
 
