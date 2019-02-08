@@ -11,7 +11,7 @@
 
         <variable
             name="vm"
-            type="ca.hoogit.whalesay.features.about.ui.AboutViewModel"
+            type="com.worldturtlemedia.whalesay.features.about.ui.AboutViewModel"
             />
 
     </data>
