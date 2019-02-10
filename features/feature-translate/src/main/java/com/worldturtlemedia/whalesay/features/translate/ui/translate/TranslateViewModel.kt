@@ -6,7 +6,6 @@ import com.etiennelenhart.eiffel.state.ViewEvent
 import com.etiennelenhart.eiffel.state.update
 import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
 import com.github.ajalt.timberkt.d
-import com.worldturtlemedia.whalesay.core.ktx.isNotNullOrNotEmpty
 import com.worldturtlemedia.whalesay.core.view.lib.eiffel.buildInterceptors
 import com.worldturtlemedia.whalesay.core.view.state.MicPermissionState
 import com.worldturtlemedia.whalesay.core.view.state.canUseMic
@@ -16,10 +15,10 @@ import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAc
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.Loading
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextToSpeech
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextToSpeechAudio
-import com.worldturtlemedia.whalesay.features.translate.ui.translate.domain.EncodedAudioString
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.domain.TextToSpeechException
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.domain.TextToSpeechUseCase
 import com.worldturtlemedia.whalesay.features.translate.util.toWhalese
+import java.io.File
 import javax.inject.Inject
 
 data class TranslateError(val type: ErrorType) : ViewEvent()
@@ -29,7 +28,8 @@ data class TranslateState(
     val micPermissionState: MicPermissionState = MicPermissionState.Pending,
     val humanText: String = "",
     val whaleText: String = "",
-    val audioData: EncodedAudioString? = null,
+    // TODO - Convert to an Async containing the File object
+    val audioFile: File? = null,
     val errorEvent: TranslateError? = null,
     val isPlaying: Boolean = false,
     val isLoading: Boolean = false,
@@ -40,7 +40,7 @@ sealed class TranslateAction : Action {
     data class Init(val state: MicPermissionState) : TranslateAction()
     data class TextEntered(val text: String) : TranslateAction()
     data class Error(val type: ErrorType) : TranslateAction()
-    data class TextToSpeechAudio(val data: EncodedAudioString) : TranslateAction()
+    data class TextToSpeechAudio(val file: File) : TranslateAction()
     object TextToSpeech : TranslateAction()
     object Loading : TranslateAction()
 }
@@ -59,7 +59,7 @@ class TranslateViewModel @Inject constructor(
                 humanText = action.text,
                 whaleText = action.text.toWhalese()
             )
-            is TextToSpeechAudio -> copy(isLoading = false, audioData = action.data)
+            is TextToSpeechAudio -> copy(isLoading = false, audioFile = action.file)
             is Loading -> copy(isLoading = true)
             is Error -> copy(isLoading = false, errorEvent = TranslateError(action.type))
             else -> this
@@ -97,7 +97,7 @@ class TranslateViewModel @Inject constructor(
             isPlaying -> d { "STOP THE MUSIC" }
             isRecording -> d { "STOP RECORDING" }
             whaleText.isNotEmpty() -> dispatch(TranslateAction.TextToSpeech)
-            audioData?.data.isNotNullOrNotEmpty() -> d { "PLAY SOME WHALE TEXT" }
+            audioFile != null -> d { "PLAY SOME WHALE TEXT" }
             micPermissionState.canUseMic && !isRecording -> d { "START RECORDING" }
         }
     }
