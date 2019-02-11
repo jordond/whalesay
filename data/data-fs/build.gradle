@@ -2,8 +2,4 @@ apply from: "${rootDir}/buildsystem/module.gradle"
 
 dependencies {
     implementation project(":core:core")
-
-    api project(":data:data-api")
-    api project(":data:data-db")
-    api project(":data:data-fs")
 }

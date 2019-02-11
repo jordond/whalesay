@@ -1,10 +1,18 @@
-include ':mobile',
-        ':core:core',
+/* Application modules */
+include ':mobile'
+
+/* Core modules */
+include ':core:core',
         ':core:core-view',
-        ':core:core-ktx',
-        ':data:data-db',
+        ':core:core-ktx'
+
+/* Data modules */
+include ':data:data-db',
         ':data:data-api',
-        ':data:data-repository',
-        ':features:feature-onboarding',
+        ':data:data-fs',
+        ':data:data-repository'
+
+/* Feature modules */
+include ':features:feature-onboarding',
         ':features:feature-about',
         ':features:feature-translate'
