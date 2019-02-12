@@ -5,8 +5,9 @@ import com.worldturtlemedia.whalesay.data.db.texttospeech.DefaultTextToSpeechSet
 import com.worldturtlemedia.whalesay.data.db.texttospeech.DefaultTextToSpeechSettings.SPEAKING_RATE
 import com.worldturtlemedia.whalesay.data.db.texttospeech.DefaultTextToSpeechSettings.VOICE
 import com.worldturtlemedia.whalesay.data.db.texttospeech.DefaultTextToSpeechSettings.VOLUME_GAIN
+import com.worldturtlemedia.whalesay.data.db.texttospeech.TextToSpeechSettings
 
-object DebugPrefs : Prefs() {
+object Prefs : SharedPrefs() {
 
     override val kotprefName: String = "debug_${super.kotprefName}"
 
@@ -24,7 +25,15 @@ object DebugPrefs : Prefs() {
     var ttsVolumeGain: Float by floatPref(VOLUME_GAIN)
 }
 
-fun DebugPrefs.setDebugVoiceSettings() {
+fun Prefs.textToSpeechSettings() = TextToSpeechSettings(
+    voice = ttsVoice,
+    gender = ttsGender,
+    speakingRate = ttsSpeakingRate,
+    pitch = ttsPitch,
+    volumeGain = ttsVolumeGain
+)
+
+fun Prefs.setDebugVoiceSettings() {
     if (hasSetDebugDefaults) return
     ttsVoice = VOICE
     ttsGender = GENDER
