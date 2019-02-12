@@ -1,5 +1,6 @@
 package com.worldturtlemedia.whalesay.data.repository
 
+import com.github.ajalt.timberkt.d
 import com.github.ajalt.timberkt.e
 import com.worldturtlemedia.data.fs.audio.TextToSpeechAudioWriter
 import com.worldturtlemedia.whalesay.core.coroutines.CoroutinesDispatcherProvider
@@ -29,6 +30,8 @@ class TextToSpeechRepository @Inject constructor(
         input: String,
         settings: TextToSpeechSettings = textToSpeechDao.settings
     ): APIResult<File> {
+        d { "Using settings: $settings" }
+
         val result = textToSpeechDataSource.synthesizeTextToSpeech(
             createPayload(input, settings)
         )
@@ -38,6 +41,8 @@ class TextToSpeechRepository @Inject constructor(
             is APIResult.Error -> result
         }
     }
+
+    suspend fun deleteSavedAudio(): Boolean = textToSpeechAudioWriter.deleteAudioFile()
 
     private fun createPayload(
         input: String,

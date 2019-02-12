@@ -1,6 +1,8 @@
 package com.worldturtlemedia.data.fs.util
 
 import android.util.Base64
+import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
 import java.util.Base64 as UtilBase64
 
 /**
@@ -16,9 +18,13 @@ interface Base64Decoder {
      *
      * @param[base64String] Base64 encoded string.
      * @param[flags] Decoding flags, see [Base64.decode].
-     * @return Decoded string.
+     * @return Decoded string as a ByteArray.
      */
-    fun decode(base64String: String, flags: Int = Base64.DEFAULT): String
+    fun decode(
+        base64String: String,
+        charset: Charset = StandardCharsets.ISO_8859_1,
+        flags: Int = Base64.DEFAULT
+    ): ByteArray
 }
 
 /**
@@ -35,6 +41,9 @@ object DefaultBase64Decoder : Base64Decoder {
      * @param[flags] Decoding flags, see [Base64.decode].
      * @return Decoded string.
      */
-    override fun decode(base64String: String, flags: Int): String =
-        Base64.decode(base64String, flags).toString()
+    override fun decode(
+        base64String: String,
+        charset: Charset,
+        flags: Int
+    ): ByteArray = Base64.decode(base64String.toByteArray(StandardCharsets.ISO_8859_1), flags)
 }

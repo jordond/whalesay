@@ -10,7 +10,6 @@ import com.etiennelenhart.eiffel.interception.command.LiveCommand
 import com.etiennelenhart.eiffel.interception.command.LiveReaction
 import com.etiennelenhart.eiffel.interception.command.Reaction
 import com.etiennelenhart.eiffel.interception.command.command
-import com.etiennelenhart.eiffel.interception.command.consuming
 import com.etiennelenhart.eiffel.interception.command.liveCommand
 import com.etiennelenhart.eiffel.interception.filter
 import com.etiennelenhart.eiffel.interception.pipe
@@ -100,12 +99,15 @@ class InterceptorBuilder<S : State, A : Action> {
      * @see addPipe
      * @param[T] Specific [Action] you want to target.
      * @param[before] Lambda expression called with the current [State] and scoped to received [Action].
+     * @param[after] Lambda expression called with the current [State] and scoped to received [Action].
      * @return Instance of [InterceptorBuilder].
      */
     inline fun <reified T : A> addPipeOn(
-        crossinline before: (state: S, action: T) -> Unit = { _, _ -> }
+        crossinline before: (state: S, action: T) -> Unit = { _, _ -> },
+        crossinline after: (state: S, action: T?) -> Unit = { _, _ -> }
     ) = addPipe(
-        before = { state, action -> if (action is T) before(state, action) }
+        before = { state, action -> if (action is T) before(state, action) },
+        after = { state, action -> if (action is T) after(state, action) }
     )
 
     /**
@@ -125,6 +127,20 @@ class InterceptorBuilder<S : State, A : Action> {
      * @return Instance of [InterceptorBuilder].
      */
     fun addPipeBefore(before: (state: S, action: A) -> Unit) = addPipe(before = before)
+
+    /**
+     * Add a before [Pipe] targeting a specific [Action].
+     *
+     * @see addPipeOn
+     * @param[T] Specific [Action] you want to target.
+     * @param[before] Lambda expression called with the current [State] and scoped to received [Action].
+     * @return Instance of [InterceptorBuilder].
+     */
+    inline fun <reified T : A> addPipeBeforeOn(
+        crossinline before: (state: S, action: T) -> Unit = { _, _ -> }
+    ) = addPipeBefore { state, action ->
+        if (action is T) before(state, action)
+    }
 
     /**
      * Add an after [Pipe].
@@ -172,16 +188,61 @@ class InterceptorBuilder<S : State, A : Action> {
         interceptions.add(command(react))
     }
 
+    /**
+     * Add a [Command] targeting a specific [Action], and returning [Reaction.Consuming] if [A] matches [T].
+     *
+     * Example:
+     *
+     * ```
+     * buildInterceptions<SampleState, SampleAction> {
+     *   addCommandOn<SampleAction.FetchSomeData>(SampleAction.Loading) { _, action, dispatch ->
+     *      try {
+     *         val result = sampleRepository.fetchData(action.someValue)
+     *         dispatch(SampleAction.Success(result))
+     *      catch(error: Throwable) {
+     *         dispatch(SampleAction.Error)
+     *      }
+     *   }
+     * }
+     * ```
+     *
+     * @see addCommand
+     * @param[T] Specific [Action] of type [A].
+     * @param[immediateAction] [Action] to immediately return.
+     * @param[block] Lambda expression called with the target action [T].
+     * @return Instance of [InterceptorBuilder].
+     */
     inline fun <reified T : A> addCommandOn(
         immediateAction: A,
-        noinline block: suspend (state: S, action: A, dispatch: (A) -> Unit) -> Unit
-    ) {
+        crossinline block: suspend (state: S, action: T, dispatch: (A) -> Unit) -> Unit
+    ): InterceptorBuilder<S, A> {
         val command = command<S, A> { action ->
-            if (action is T) consuming(immediateAction, block)
-            else Reaction.Ignoring()
+            if (action is T) {
+                Reaction.Consuming(immediateAction) { state, action, dispatch ->
+                    block(state, action as T, dispatch)
+                }
+            } else Reaction.Ignoring()
         }
 
         interceptions.add(command)
+
+        return this
+    }
+
+    /**
+     * Add a [Command] targeting a specific [A], then dispatch a new [Action].
+     *
+     * @see addCommandOn
+     * @param[T] Specific [Action] of type [A].
+     * @param[immediateAction] [Action] to immediately return.
+     * @param[block] Lambda expression called with the target action [T], which returns a new [A] to dispatch.
+     * @return Instance of [InterceptorBuilder].
+     */
+    inline fun <reified T : A> addCommandOnThen(
+        immediateAction: A,
+        crossinline block: suspend (state: S, action: T) -> A
+    ) = addCommandOn<T>(immediateAction) { state, action, dispatch ->
+        dispatch(block(state, action))
     }
 
     /**

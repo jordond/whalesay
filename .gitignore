@@ -30,6 +30,8 @@ build/
 .navigation
 captures/
 output.json
+.classpath
+org.eclipse.buildship.core.prefs
 
 .project
 

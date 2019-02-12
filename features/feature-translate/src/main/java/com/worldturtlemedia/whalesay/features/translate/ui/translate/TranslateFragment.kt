@@ -14,6 +14,8 @@ import com.worldturtlemedia.whalesay.core.view.state.microphonePermissionState
 import com.worldturtlemedia.whalesay.core.view.util.ktx.getProvidedFAB
 import com.worldturtlemedia.whalesay.core.view.viewmodel.injectedViewModel
 import com.worldturtlemedia.whalesay.features.translate.R
+import com.worldturtlemedia.whalesay.features.translate.audio.PlayerState
+import com.worldturtlemedia.whalesay.features.translate.audio.canPlay
 import com.worldturtlemedia.whalesay.features.translate.databinding.FragmentTranslateBinding
 import com.worldturtlemedia.whalesay.features.translate.ui.error.ErrorNavArgs
 import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
@@ -60,7 +62,8 @@ class TranslateFragment : BindableFragment<FragmentTranslateBinding>() {
     private fun renderFAB(fab: FloatingActionButton, state: TranslateState) = with(state) {
         val imgRes = when {
             isRecording -> R.drawable.ic_stop
-            whaleText.isNotEmpty() -> if (isPlaying) R.drawable.ic_stop else R.drawable.ic_play
+            audioPlayerState is PlayerState.Playing -> R.drawable.ic_stop
+            (whaleText.isNotEmpty() && audioPlayerState.canPlay) -> R.drawable.ic_play
             micPermissionState.canUseMic -> R.drawable.ic_mic_white
             else -> null
         }?.apply { fab.setImageResource(this) }
