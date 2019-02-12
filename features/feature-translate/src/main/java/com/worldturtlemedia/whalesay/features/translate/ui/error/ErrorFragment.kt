@@ -9,7 +9,6 @@ import com.worldturtlemedia.whalesay.core.view.fragment.BindableFragment
 import com.worldturtlemedia.whalesay.core.view.viewmodel.injectedViewModel
 import com.worldturtlemedia.whalesay.features.translate.R
 import com.worldturtlemedia.whalesay.features.translate.databinding.FragmentTranslateErrorBinding
-import com.worldturtlemedia.whalesay.features.translate.ui.error.state.ErrorBindingState
 import com.worldturtlemedia.whalesay.features.translate.ui.error.state.ErrorNavEvents
 
 class ErrorFragment : BindableFragment<FragmentTranslateErrorBinding>() {
@@ -21,7 +20,7 @@ class ErrorFragment : BindableFragment<FragmentTranslateErrorBinding>() {
     private val args by navArgs<ErrorFragmentArgs>()
 
     override fun setupViews() {
-        binding.state = ErrorBindingState()
+        binding.vm = viewModel
 
         binding.btnTryAgain.onClick { viewModel.onTryAgainClicked() }
     }
@@ -30,7 +29,6 @@ class ErrorFragment : BindableFragment<FragmentTranslateErrorBinding>() {
         dispatch(ErrorAction.Init(args.data.error))
 
         state.observe(owner) { state ->
-            binding.state = ErrorBindingState.mapping.invoke(state, binding.state)
             state.navEvent?.peek(::handleNavEvents)
         }
     }

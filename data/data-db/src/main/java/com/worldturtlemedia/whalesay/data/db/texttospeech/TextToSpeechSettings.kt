@@ -1,6 +1,6 @@
 package com.worldturtlemedia.whalesay.data.db.texttospeech
 
-import com.worldturtlemedia.whalesay.data.db.prefs.Prefs
+import com.worldturtlemedia.whalesay.data.db.prefs.DebugPrefs
 
 data class TextToSpeechSettings(
     val voice: String,
@@ -10,7 +10,7 @@ data class TextToSpeechSettings(
     val volumeGain: Float
 )
 
-fun Prefs.textToSpeechSettings() = TextToSpeechSettings(
+fun DebugPrefs.textToSpeechSettings() = TextToSpeechSettings(
     voice = ttsVoice,
     gender = ttsGender,
     speakingRate = ttsSpeakingRate,

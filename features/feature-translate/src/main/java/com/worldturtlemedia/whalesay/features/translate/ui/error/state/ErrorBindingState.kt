@@ -1,11 +1,14 @@
 package com.worldturtlemedia.whalesay.features.translate.ui.error.state
 
 import androidx.annotation.StringRes
-import com.worldturtlemedia.whalesay.features.translate.R
-import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
+import androidx.lifecycle.LiveData
 import com.etiennelenhart.eiffel.binding.BindableMapping
 import com.etiennelenhart.eiffel.binding.BindableState
 import com.etiennelenhart.eiffel.binding.bindableMapping
+import com.worldturtlemedia.whalesay.features.translate.R
+import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
+
+typealias LiveErrorBindingState = LiveData<ErrorBindingState>
 
 data class ErrorBindingState(
     @StringRes val titleID: Int = R.string.error_generic,
@@ -22,6 +25,7 @@ data class ErrorBindingState(
                     ErrorType.Google -> R.string.error_google
                     ErrorType.SpeechToText -> R.string.error_speech_to_text
                     ErrorType.TextToSpeech -> R.string.error_text_to_speech
+                    ErrorType.AudioPlayer -> R.string.error_audio_player
                     else -> R.string.empty
                 }
 

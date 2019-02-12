@@ -1,11 +1,14 @@
 package com.worldturtlemedia.whalesay.features.translate.ui.error
 
-import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
-import com.worldturtlemedia.whalesay.features.translate.ui.error.state.ErrorNavEvents
-import com.worldturtlemedia.whalesay.features.translate.ui.error.state.ErrorState
+import androidx.lifecycle.LiveData
+import com.etiennelenhart.eiffel.binding.extension.toBindable
 import com.etiennelenhart.eiffel.state.Action
 import com.etiennelenhart.eiffel.state.update
 import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
+import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
+import com.worldturtlemedia.whalesay.features.translate.ui.error.state.ErrorBindingState
+import com.worldturtlemedia.whalesay.features.translate.ui.error.state.ErrorNavEvents
+import com.worldturtlemedia.whalesay.features.translate.ui.error.state.ErrorState
 import javax.inject.Inject
 
 sealed class ErrorAction : Action {
@@ -24,6 +27,9 @@ class ErrorViewModel @Inject constructor() : EiffelViewModel<ErrorState, ErrorAc
     initialState = ErrorState(),
     update = updater
 ) {
+
+    val errorBindingState: LiveData<ErrorBindingState>
+        get() = state.toBindable(ErrorBindingState.mapping)
 
     fun onTryAgainClicked() {
         dispatch(ErrorAction.Navigate(ErrorNavEvents.Back()))

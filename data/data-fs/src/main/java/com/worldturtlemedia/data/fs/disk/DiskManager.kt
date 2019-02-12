@@ -36,7 +36,5 @@ interface DiskManager {
      * @param[filename] Filename of file to delete.
      */
     @WorkerThread
-    fun deleteFromDisk(filename: String) {
-        File(directory, filename).delete()
-    }
+    fun deleteFromDisk(filename: String): Boolean = File(directory, filename).delete()
 }
