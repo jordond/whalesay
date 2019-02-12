@@ -2,6 +2,7 @@
     <string name="screen_about">About</string>
     <string name="author_with_year">Jordon de Hoog, %s</string>
     <string name="view_source">View source</string>
+    <string name="view_licenses">View OSS Licences</string>
     <string name="share_the_app">Share with humans</string>
     <string name="rate_on_play_store">Rate on Play store</string>
     <string name="view_website">View Website</string>

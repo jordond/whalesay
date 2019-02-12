@@ -1,5 +1,7 @@
 package com.worldturtlemedia.whalesay.core.ktx
 
+import android.app.Activity
+import android.content.Intent
 import android.transition.Transition
 import android.view.View
 import androidx.annotation.TransitionRes
@@ -15,6 +17,12 @@ fun Fragment.createSharedActivityTransition(sharedView: View?): ActivityNavigato
         ).let { Extras.Builder().setActivityOptions(it).build() }
     }
 }
+
+inline fun <reified T : Activity> Fragment.startActivity() {
+    startActivity(Intent(requireContext(), T::class.java))
+}
+
+fun Fragment.launchViewIntent(url: String) = requireContext().launchViewIntent(url)
 
 fun Fragment.updateTransitions(
     enter: Transition? = null,
