@@ -2,7 +2,7 @@ buildscript {
     ext {
         // Build
         gradle = '3.4.0-beta03'
-        kotlinVersion = '1.3.20'
+        kotlinVersion = '1.3.21'
         kotlinCoroutines = '1.1.0'
         dokka = '0.9.17'
 
@@ -18,6 +18,10 @@ buildscript {
         androidMinimumSdkVersion = 21
         suffixDebug = "dev"
         suffixBeta = "beta"
+
+        // Plugins
+        pluginOSSLicense = "0.9.3"
+        pluginOSSLicenseImpl = "16.0.0"
 
         // Architecture
         archLifecycle = '2.0.0'
@@ -90,6 +94,7 @@ buildscript {
         classpath 'gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:6.2.1'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
         classpath 'gradle.plugin.com.star-zero.gradle:githook:1.1.0'
+        classpath "com.google.android.gms:oss-licenses-plugin:$pluginOSSLicense"
     }
 }
 
