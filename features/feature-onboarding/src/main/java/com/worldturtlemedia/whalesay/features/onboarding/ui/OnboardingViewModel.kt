@@ -1,5 +1,12 @@
 package com.worldturtlemedia.whalesay.features.onboarding.ui
 
+import com.etiennelenhart.eiffel.interception.Interception
+import com.etiennelenhart.eiffel.interception.pipe
+import com.etiennelenhart.eiffel.state.Action
+import com.etiennelenhart.eiffel.state.State
+import com.etiennelenhart.eiffel.state.ViewEvent
+import com.etiennelenhart.eiffel.state.update
+import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
 import com.worldturtlemedia.whalesay.core.view.state.MicPermissionState
 import com.worldturtlemedia.whalesay.core.view.state.MicPermissionState.Denied
 import com.worldturtlemedia.whalesay.core.view.state.MicPermissionState.Granted
@@ -9,12 +16,6 @@ import com.worldturtlemedia.whalesay.core.view.util.ktx.currentState
 import com.worldturtlemedia.whalesay.data.db.prefs.Prefs
 import com.worldturtlemedia.whalesay.features.onboarding.ui.OnboardingAction.DispatchEvent
 import com.worldturtlemedia.whalesay.features.onboarding.ui.OnboardingAction.UpdateMicPermission
-import com.etiennelenhart.eiffel.interception.pipe
-import com.etiennelenhart.eiffel.state.Action
-import com.etiennelenhart.eiffel.state.State
-import com.etiennelenhart.eiffel.state.ViewEvent
-import com.etiennelenhart.eiffel.state.update
-import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
 import javax.inject.Inject
 
 sealed class OnboardingEvents : ViewEvent() {
@@ -42,12 +43,13 @@ private fun onNavigateUpdatePrefs(prefs: Prefs) = pipe<OnboardingState, Onboardi
 
 class OnboardingViewModel @Inject constructor(
     prefs: Prefs
-) : EiffelViewModel<OnboardingState, OnboardingAction>(
-    initialState = OnboardingState(),
-    interceptions = listOf(
+) : EiffelViewModel<OnboardingState, OnboardingAction>(OnboardingState()) {
+
+    override val interceptions: List<Interception<OnboardingState, OnboardingAction>> = listOf(
         onNavigateUpdatePrefs(prefs)
-    ),
-    update = update { action ->
+    )
+
+    override val update = update<OnboardingState, OnboardingAction> { action ->
         when (action) {
             is UpdateMicPermission -> copy(
                 micState = action.state,
@@ -57,7 +59,6 @@ class OnboardingViewModel @Inject constructor(
             is DispatchEvent -> copy(event = action.event)
         }
     }
-) {
 
     fun onButtonClicked() {
         val event = when (currentState.micState) {

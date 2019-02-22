@@ -16,17 +16,15 @@ sealed class ErrorAction : Action {
     data class Navigate(val type: ErrorNavEvents) : ErrorAction()
 }
 
-private val updater = update<ErrorState, ErrorAction> { action ->
-    when (action) {
-        is ErrorAction.Init -> copy(type = action.type)
-        is ErrorAction.Navigate -> copy(navEvent = action.type)
-    }
-}
+class ErrorViewModel @Inject constructor() :
+    EiffelViewModel<ErrorState, ErrorAction>(ErrorState()) {
 
-class ErrorViewModel @Inject constructor() : EiffelViewModel<ErrorState, ErrorAction>(
-    initialState = ErrorState(),
-    update = updater
-) {
+    override val update = update<ErrorState, ErrorAction> { action ->
+        when (action) {
+            is ErrorAction.Init -> copy(type = action.type)
+            is ErrorAction.Navigate -> copy(navEvent = action.type)
+        }
+    }
 
     val errorBindingState: LiveData<ErrorBindingState>
         get() = state.toBindable(ErrorBindingState.mapping)

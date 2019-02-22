@@ -7,7 +7,7 @@ import com.etiennelenhart.eiffel.state.update
 import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
 import com.github.ajalt.timberkt.d
 import com.worldturtlemedia.whalesay.core.util.Fail
-import com.worldturtlemedia.whalesay.core.view.lib.eiffel.buildInterceptors
+import com.worldturtlemedia.whalesay.core.view.lib.eiffel.buildInterceptions
 import com.worldturtlemedia.whalesay.core.view.state.MicPermissionState
 import com.worldturtlemedia.whalesay.core.view.state.canUseMic
 import com.worldturtlemedia.whalesay.core.view.util.ktx.currentState
@@ -50,15 +50,14 @@ sealed class TranslateAction : Action {
     object StopAudioPlayback : TranslateAction()
     object TextToSpeech : TranslateAction()
     object Loading : TranslateAction()
-    object None : TranslateAction()
 }
 
 class TranslateViewModel @Inject constructor(
     textToSpeechUseCase: TextToSpeechUseCase,
     private val audioPlayerUseCase: AudioPlayerUseCase
-) : EiffelViewModel<TranslateState, TranslateAction>(
-    initialState = TranslateState(),
-    update = update { action ->
+) : EiffelViewModel<TranslateState, TranslateAction>(TranslateState()) {
+
+    override val update = update<TranslateState, TranslateAction> { action ->
         when (action) {
             is TranslateAction.Init -> copy(
                 initialized = true,
@@ -74,32 +73,33 @@ class TranslateViewModel @Inject constructor(
             is Error -> copy(isLoading = false, errorEvent = TranslateError(action.type))
             else -> this
         }
-    },
-    interceptions = buildInterceptors {
-        addCommandOnThen<TextToSpeech>(Loading) { state, _ ->
+    }
+
+    override val interceptions = buildInterceptions<TranslateState, TranslateAction> {
+        addConsumingCommandOn<TextToSpeech>(Loading) { state, _, dispatch ->
             try {
                 val result = textToSpeechUseCase.translateText(state.whaleText)
 
-                TextToSpeechAudio(result)
+                dispatch(TextToSpeechAudio(result))
             } catch (error: Throwable) {
-                val type = if (error is TextToSpeechException) error.type
-                else ErrorType.Generic
+                val type =
+                    if (error is TextToSpeechException) error.type
+                    else ErrorType.Generic
 
-                Error(type)
+                dispatch(Error(type))
             }
         }
 
-        addCommandOn<TextToSpeechAudio>(Loading) { _, action, dispatch ->
+        addConsumingCommandOn<TextToSpeechAudio>(Loading) { _, action, dispatch ->
             when (audioPlayerUseCase.play(action.file.absolutePath)) {
                 is Fail -> dispatch(Error(ErrorType.AudioPlayer))
             }
         }
 
-        addPipeBeforeOn<StopAudioPlayback> { _, _ ->
+        addBeforePipeOn<StopAudioPlayback> { _, _ ->
             audioPlayerUseCase.stop()
         }
     }
-) {
 
     init {
         addStateSource(audioPlayerUseCase.playerState) { playerState ->
@@ -126,8 +126,8 @@ class TranslateViewModel @Inject constructor(
         when {
             audioPlayerState is PlayerState.Playing -> dispatch(StopAudioPlayback)
             isRecording -> d { "STOP RECORDING" }
-            whaleText.isNotEmpty() -> dispatch(TranslateAction.TextToSpeech)
             audioFile != null -> d { "PLAY SOME WHALE TEXT" }
+            whaleText.isNotEmpty() -> dispatch(TranslateAction.TextToSpeech)
             micPermissionState.canUseMic && !isRecording -> d { "START RECORDING" }
         }
     }
