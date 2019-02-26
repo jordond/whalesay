@@ -15,9 +15,6 @@ object Prefs : SharedPrefs() {
 
     var hasSetDebugDefaults: Boolean by booleanPref(false)
 
-    // TODO This is not working, switch to RemoteConfig
-    // So it looks like Hyperion is having trouble changing these values...
-    // So RemoteConfig is the better option I think.
     var ttsVoice: String by stringPref(VOICE)
     var ttsGender: String by stringPref(GENDER)
     var ttsSpeakingRate: Float by floatPref(SPEAKING_RATE)

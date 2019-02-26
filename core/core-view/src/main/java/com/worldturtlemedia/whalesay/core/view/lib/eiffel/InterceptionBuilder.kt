@@ -42,6 +42,25 @@ open class InterceptionBuilder<S : State, A : Action> {
      */
     private val interceptions = mutableListOf<Interception<S, A>>()
 
+    private var currentDebugName: String = ""
+        get() {
+            val value = field
+            field = ""
+            return value
+        }
+
+    private fun getDebugName(name: String = ""): String = name.ifEmpty { currentDebugName }
+
+    fun named(name: String) {
+        currentDebugName = name
+    }
+
+    fun named(name: String, block: InterceptionBuilder<S, A>.() -> Unit) {
+        InterceptionBuilder.build(block).toList().forEach { interception ->
+            add { attachDebugName(name, interception) }
+        }
+    }
+
     /**
      * Add an interception to the list of [interceptions].
      *
@@ -64,8 +83,14 @@ open class InterceptionBuilder<S : State, A : Action> {
      *
      * @param[block] Lambda expression that returns the [Interception].
      */
-    fun add(block: () -> Interception<S, A>) {
-        interceptions.add(block())
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun add(debugName: String = "", block: () -> Interception<S, A>) {
+        val interception = getDebugName(debugName)
+            .takeIf { it.isNotEmpty() }
+            ?.let { attachDebugName(it, block()) }
+            ?: block()
+
+        interceptions.add(interception)
     }
 
     /**
@@ -83,9 +108,8 @@ open class InterceptionBuilder<S : State, A : Action> {
      * @param[debugName] Name to use when logging is enabled with [Eiffel.debugMode].
      * @param[predicate] Lambda expression to be passed to [filter].
      */
-    fun addFilter(debugName: String = "", predicate: (state: S, action: A) -> Boolean) = add {
-        filter(debugName, predicate)
-    }
+    fun addFilter(debugName: String = "", predicate: (state: S, action: A) -> Boolean) =
+        add(debugName) { filter(predicate = predicate) }
 
     /**
      * Add a [Filter] that targets a specific [A] [Action].
@@ -133,7 +157,7 @@ open class InterceptionBuilder<S : State, A : Action> {
         debugName: String = "",
         before: (state: S, action: A) -> Unit,
         after: (state: S, action: A?) -> Unit
-    ) = add { pipe(debugName, before, after) }
+    ) = add(debugName) { pipe(before = before, after = after) }
 
     /**
      * Similar to [addPipe] except it will only execute on a specific [Action] of type [T].
@@ -182,7 +206,7 @@ open class InterceptionBuilder<S : State, A : Action> {
     fun addBeforePipe(
         debugName: String = "",
         before: (state: S, action: A) -> Unit
-    ) = add { pipe(debugName, before) }
+    ) = add(debugName) { pipe(before = before) }
 
     /**
      * A 'before' only version of [addPipeOn].
@@ -218,8 +242,8 @@ open class InterceptionBuilder<S : State, A : Action> {
      */
     fun addAfterPipe(
         debugName: String = "",
-        after: (state: S, action: A) -> Unit
-    ) = add { pipe(debugName, after) }
+        after: (state: S, action: A?) -> Unit
+    ) = add(debugName) { pipe(after = after) }
 
     /**
      * A 'after' only version of [addPipeOn].
@@ -253,8 +277,8 @@ open class InterceptionBuilder<S : State, A : Action> {
      * @param[debugName] Name to use when logging is enabled with [Eiffel.debugMode].
      * @param[adapt] Lambda expression that adapts the given [Action] to a new one.
      */
-    fun addAdapter(debugName: String = "", adapt: (action: A) -> A) = add {
-        adapter(debugName, adapt)
+    fun addAdapter(debugName: String = "", adapt: (action: A) -> A) = add(debugName) {
+        adapter(adapt = adapt)
     }
 
     /**
@@ -276,7 +300,9 @@ open class InterceptionBuilder<S : State, A : Action> {
     inline fun <reified T : A> addAdapterOn(
         debugName: String = "",
         crossinline adapt: (action: T) -> T
-    ) = addAdapter(debugName) { action -> if (action is T) adapt(action) else action }
+    ) = addAdapter(debugName) { action ->
+        if (action is T) adapt(action) else action
+    }
 
     /**
      * Add a [Command] to [interceptions], passes [react] lambda to [command].
@@ -285,8 +311,8 @@ open class InterceptionBuilder<S : State, A : Action> {
      * @param[debugName] Name to use when logging is enabled with [Eiffel.debugMode].
      * @param[react] Lambda expression called with the received [Action]. Return either [Reaction.Consuming] or [Reaction.Ignoring].
      */
-    fun addCommand(debugName: String = "", react: (action: A) -> Reaction<S, A>) = add {
-        command(debugName, react)
+    fun addCommand(debugName: String = "", react: (action: A) -> Reaction<S, A>) = add(debugName) {
+        command(react = react)
     }
 
     /**
@@ -388,9 +414,8 @@ open class InterceptionBuilder<S : State, A : Action> {
      * @param[debugName] Name to use when logging is enabled with [Eiffel.debugMode].
      * @param[react] Suspending lambda expression returning a [Channel] to receive from. To update state call [Channel.send] on this channel.
      */
-    fun addLiveCommand(debugName: String = "", react: (action: A) -> LiveReaction<S, A>) = add {
-        liveCommand(debugName, react)
-    }
+    fun addLiveCommand(debugName: String = "", react: (action: A) -> LiveReaction<S, A>) =
+        add(debugName) { liveCommand(react = react) }
 
     /**
      * Similar to [addLiveCommand] except it targets a single [Action] of type [T].
@@ -506,3 +531,20 @@ open class InterceptionBuilder<S : State, A : Action> {
 fun <S : State, A : Action> buildInterceptions(
     block: InterceptionBuilder<S, A>.() -> Unit
 ): List<Interception<S, A>> = InterceptionBuilder.build(block)
+
+fun <S : State, A : Action> attachDebugName(
+    debugName: String,
+    interception: Interception<S, A>
+): Interception<S, A> =
+    object : Interception<S, A> {
+
+        override val debugName: String = debugName
+
+        override suspend fun invoke(
+            scope: CoroutineScope,
+            state: S,
+            action: A,
+            dispatch: (action: A) -> Unit,
+            next: suspend (scope: CoroutineScope, state: S, action: A, dispatch: (A) -> Unit) -> A?
+        ): A? = interception.invoke(scope, state, action, dispatch, next)
+    }

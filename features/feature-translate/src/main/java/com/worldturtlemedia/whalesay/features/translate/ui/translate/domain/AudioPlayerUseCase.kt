@@ -18,11 +18,12 @@ class AudioPlayerUseCase @Inject constructor(
         audioPlayer.setOnStateChangedListener { playerState.postValue(it) }
     }
 
-    suspend fun play(path: String): Async<Boolean> = try {
-        Success(audioPlayer.playFile(path))
-    } catch (error: Throwable) {
-        Fail(error)
-    }
+    suspend fun play(path: String): Async<Boolean> =
+        try {
+            Success(audioPlayer.playFile(path))
+        } catch (error: Throwable) {
+            Fail(error)
+        }
 
     fun stop() = audioPlayer.stop()
 

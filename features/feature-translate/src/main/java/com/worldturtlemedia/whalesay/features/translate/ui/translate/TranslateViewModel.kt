@@ -6,6 +6,7 @@ import com.etiennelenhart.eiffel.state.ViewEvent
 import com.etiennelenhart.eiffel.state.update
 import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
 import com.github.ajalt.timberkt.d
+import com.github.ajalt.timberkt.e
 import com.worldturtlemedia.whalesay.core.util.Fail
 import com.worldturtlemedia.whalesay.core.view.lib.eiffel.buildInterceptions
 import com.worldturtlemedia.whalesay.core.view.state.MicPermissionState
@@ -15,6 +16,7 @@ import com.worldturtlemedia.whalesay.features.translate.audio.PlayerState
 import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.Error
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.Loading
+import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.PlayAudio
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.StopAudioPlayback
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextToSpeech
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextToSpeechAudio
@@ -26,16 +28,15 @@ import com.worldturtlemedia.whalesay.features.translate.util.toWhalese
 import java.io.File
 import javax.inject.Inject
 
-data class TranslateError(val type: ErrorType) : ViewEvent()
+data class TranslateErrorEvent(val type: ErrorType) : ViewEvent()
 
 data class TranslateState(
     val initialized: Boolean = false,
     val micPermissionState: MicPermissionState = MicPermissionState.Pending,
     val humanText: String = "",
     val whaleText: String = "",
-    // TODO - Convert to an Async containing the File object
     val audioFile: File? = null,
-    val errorEvent: TranslateError? = null,
+    val errorEvent: TranslateErrorEvent? = null,
     val audioPlayerState: PlayerState = PlayerState.Idle,
     val isLoading: Boolean = false,
     val isRecording: Boolean = false
@@ -44,9 +45,10 @@ data class TranslateState(
 sealed class TranslateAction : Action {
     data class Init(val state: MicPermissionState) : TranslateAction()
     data class TextEntered(val text: String) : TranslateAction()
-    data class Error(val type: ErrorType) : TranslateAction()
+    data class Error(val type: ErrorType, val message: String = "") : TranslateAction()
     data class TextToSpeechAudio(val file: File) : TranslateAction()
     data class UpdatePlayerState(val state: PlayerState) : TranslateAction()
+    object PlayAudio : TranslateAction()
     object StopAudioPlayback : TranslateAction()
     object TextToSpeech : TranslateAction()
     object Loading : TranslateAction()
@@ -70,12 +72,13 @@ class TranslateViewModel @Inject constructor(
             is UpdatePlayerState -> copy(audioPlayerState = action.state)
             is TextToSpeechAudio -> copy(isLoading = false, audioFile = action.file)
             is Loading -> copy(isLoading = true)
-            is Error -> copy(isLoading = false, errorEvent = TranslateError(action.type))
+            is Error -> copy(isLoading = false, errorEvent = TranslateErrorEvent(action.type))
             else -> this
         }
     }
 
     override val interceptions = buildInterceptions<TranslateState, TranslateAction> {
+        named("TranslateTextCommand")
         addConsumingCommandOn<TextToSpeech>(Loading) { state, _, dispatch ->
             try {
                 val result = textToSpeechUseCase.translateText(state.whaleText)
@@ -90,14 +93,24 @@ class TranslateViewModel @Inject constructor(
             }
         }
 
-        addConsumingCommandOn<TextToSpeechAudio>(Loading) { _, action, dispatch ->
-            when (audioPlayerUseCase.play(action.file.absolutePath)) {
-                is Fail -> dispatch(Error(ErrorType.AudioPlayer))
+        addForwardingCommandOn<PlayAudio> { state, _, dispatch ->
+            if (state.audioFile == null) {
+                dispatch(Error(ErrorType.AudioPlayer, "Audio file was null!"))
+            } else {
+                when (audioPlayerUseCase.play(state.audioFile.absolutePath)) {
+                    is Fail -> dispatch(Error(ErrorType.AudioPlayer))
+                }
             }
         }
 
+        named("StopAudioPipe")
         addBeforePipeOn<StopAudioPlayback> { _, _ ->
             audioPlayerUseCase.stop()
+        }
+
+        named("ErrorLoggingPipe")
+        addBeforePipeOn<Error> { _, action ->
+            if (action.message.isNotEmpty()) e { action.message }
         }
     }
 
@@ -126,7 +139,7 @@ class TranslateViewModel @Inject constructor(
         when {
             audioPlayerState is PlayerState.Playing -> dispatch(StopAudioPlayback)
             isRecording -> d { "STOP RECORDING" }
-            audioFile != null -> d { "PLAY SOME WHALE TEXT" }
+            audioFile != null -> dispatch(TranslateAction.PlayAudio)
             whaleText.isNotEmpty() -> dispatch(TranslateAction.TextToSpeech)
             micPermissionState.canUseMic && !isRecording -> d { "START RECORDING" }
         }
