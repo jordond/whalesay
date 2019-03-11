@@ -2,7 +2,7 @@ package com.worldturtlemedia.whalesay.features.translate.ui.error.state
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
-import com.etiennelenhart.eiffel.binding.BindableMapping
+import com.etiennelenhart.eiffel.binding.BindableMapping1
 import com.etiennelenhart.eiffel.binding.BindableState
 import com.etiennelenhart.eiffel.binding.bindableMapping
 import com.worldturtlemedia.whalesay.features.translate.R
@@ -18,8 +18,8 @@ data class ErrorBindingState(
 
     companion object {
 
-        val mapping: BindableMapping<ErrorState, ErrorBindingState>
-            get() = bindableMapping(ErrorBindingState()) { state ->
+        val mapping: BindableMapping1<ErrorState, ErrorBindingState>
+            get() = bindableMapping { state ->
                 val id = when (state.type) {
                     ErrorType.Network -> R.string.error_network
                     ErrorType.Google -> R.string.error_google

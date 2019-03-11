@@ -7,17 +7,19 @@ import com.etiennelenhart.eiffel.state.update
 import com.etiennelenhart.eiffel.viewmodel.EiffelViewModel
 import com.github.ajalt.timberkt.d
 import com.github.ajalt.timberkt.e
+import com.worldturtlemedia.eiffel.extensions.buildInterceptions
 import com.worldturtlemedia.whalesay.core.util.Fail
-import com.worldturtlemedia.whalesay.core.view.lib.eiffel.buildInterceptions
 import com.worldturtlemedia.whalesay.core.view.state.MicPermissionState
 import com.worldturtlemedia.whalesay.core.view.state.canUseMic
 import com.worldturtlemedia.whalesay.core.view.util.ktx.currentState
 import com.worldturtlemedia.whalesay.features.translate.audio.PlayerState
 import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.Error
+import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.Init
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.Loading
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.PlayAudio
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.StopAudioPlayback
+import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextEntered
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextToSpeech
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.TextToSpeechAudio
 import com.worldturtlemedia.whalesay.features.translate.ui.translate.TranslateAction.UpdatePlayerState
@@ -34,13 +36,16 @@ data class TranslateState(
     val initialized: Boolean = false,
     val micPermissionState: MicPermissionState = MicPermissionState.Pending,
     val humanText: String = "",
-    val whaleText: String = "",
     val audioFile: File? = null,
     val errorEvent: TranslateErrorEvent? = null,
     val audioPlayerState: PlayerState = PlayerState.Idle,
     val isLoading: Boolean = false,
     val isRecording: Boolean = false
-) : State
+) : State {
+
+    val whaleText: String
+        get() = humanText.toWhalese()
+}
 
 sealed class TranslateAction : Action {
     data class Init(val state: MicPermissionState) : TranslateAction()
@@ -61,14 +66,11 @@ class TranslateViewModel @Inject constructor(
 
     override val update = update<TranslateState, TranslateAction> { action ->
         when (action) {
-            is TranslateAction.Init -> copy(
+            is Init -> copy(
                 initialized = true,
                 micPermissionState = action.state
             )
-            is TranslateAction.TextEntered -> copy(
-                humanText = action.text,
-                whaleText = action.text.toWhalese()
-            )
+            is TextEntered -> copy(humanText = action.text)
             is UpdatePlayerState -> copy(audioPlayerState = action.state)
             is TextToSpeechAudio -> copy(isLoading = false, audioFile = action.file)
             is Loading -> copy(isLoading = true)
@@ -125,14 +127,14 @@ class TranslateViewModel @Inject constructor(
 
     fun initialize(micPermissionState: MicPermissionState) {
         if (!currentState.initialized || micPermissionState != currentState.micPermissionState) {
-            dispatch(TranslateAction.Init(micPermissionState))
+            dispatch(Init(micPermissionState))
         }
     }
 
     fun updateHumanText(text: String?) {
         if (text == null) return
 
-        dispatch(TranslateAction.TextEntered(text.trim()))
+        dispatch(TextEntered(text.trim()))
     }
 
     fun onFabClicked() = with(currentState) {
@@ -140,7 +142,7 @@ class TranslateViewModel @Inject constructor(
             audioPlayerState is PlayerState.Playing -> dispatch(StopAudioPlayback)
             isRecording -> d { "STOP RECORDING" }
             audioFile != null -> dispatch(TranslateAction.PlayAudio)
-            whaleText.isNotEmpty() -> dispatch(TranslateAction.TextToSpeech)
+            humanText.isNotEmpty() -> dispatch(TranslateAction.TextToSpeech)
             micPermissionState.canUseMic && !isRecording -> d { "START RECORDING" }
         }
     }

@@ -8,9 +8,11 @@ import kotlinx.android.parcel.Parcelize
  *
  * Needs to use the [Parcelize] annotation so the class can be parceled
  *
- * ex:
+ * Example:
  *
+ * ```
  * @Parcelize
  * data class AmazingFeatureUIArgs(val userID: Int): NavFragmentArgs
+ * ```
  */
 interface NavFragmentArgs : Parcelable

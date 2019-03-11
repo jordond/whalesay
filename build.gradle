@@ -59,8 +59,8 @@ buildscript {
 
         // UI
         uiGroupie = '2.3.0'
-        uiEiffelUrl = 'com.github.etiennelenhart:Eiffel'
-        uiEiffel = '-SNAPSHOT'
+        uiEiffel = 'd704f2eb6d'
+        uiEiffelAddon = "1.1.2"
 
         // Misc
         miscQuickPermissions = '0.4.0'

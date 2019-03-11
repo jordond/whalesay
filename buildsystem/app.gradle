@@ -109,7 +109,8 @@ dependencies {
     implementation "com.chibatching.kotpref:initializer:$prefsKotpref"
 
     /* UI */
-    implementation "$uiEiffelUrl:$uiEiffel"
+    implementation "com.github.etiennelenhart:Eiffel:$uiEiffel"
+    implementation "com.worldturtlemedia:eiffel-extensions:$uiEiffelAddon"
     implementation "com.xwray:groupie:$uiGroupie"
     implementation "com.xwray:groupie-databinding:$uiGroupie"
     implementation "com.xwray:groupie-kotlin-android-extensions:$uiGroupie"
