@@ -50,36 +50,36 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     /* Kotlin */
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines"
+    implementation(Libs.kotlin_stdlib_jdk7)
+    implementation(Libs.kotlinx_coroutines_core)
+    implementation(Libs.kotlinx_coroutines_android)
 
     /* Architecture components */
-    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycle"
+    implementation(Libs.lifecycle_extensions)
 
     /* Ktx */
-    implementation "com.github.ajalt:timberkt:$ktxTimber"
+    implementation(Libs.timberkt)
 
     /* Dependency Injection */
-    implementation "com.google.dagger:dagger:$diDagger"
-    implementation "com.google.dagger:dagger-android:$diDagger"
-    implementation "com.google.dagger:dagger-android-support:$diDagger"
-    kapt "com.google.dagger:dagger-compiler:$diDagger"
-    kapt "com.google.dagger:dagger-android-processor:$diDagger"
+    implementation(Libs.dagger)
+    implementation(Libs.dagger_android)
+    implementation(Libs.dagger_android_support)
+    kapt(Libs.dagger_compiler)
+    kapt(Libs.dagger_android_processor)
 
     /* Network */
-    implementation "com.squareup.retrofit2:retrofit:$networkRetrofit"
-    implementation "com.squareup.retrofit2:converter-moshi:$networkRetrofit"
-    implementation "com.squareup.okhttp3:okhttp:$networkOkhttp"
+    implementation(Libs.retrofit)
+    implementation(Libs.converter_moshi)
+    implementation(Libs.okhttp)
 
     /* Misc */
-    implementation "joda-time:joda-time:$miscJodaTime"
+    implementation(Libs.joda_time)
 
     /* Debug Utils */
-    implementation "com.jakewharton.timber:timber:$debugTimber"
+    implementation(Libs.timber)
 
     /* Testing */
-    testImplementation "junit:junit:$testJunit"
-    testImplementation "io.mockk:mockk:$testMockk"
-    testImplementation "com.willowtreeapps.assertk:assertk:$testAssertK"
+    testImplementation(Libs.junit)
+    testImplementation(Libs.mockk)
+    testImplementation(Libs.assertk)
 }

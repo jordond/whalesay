@@ -1,4 +1,4 @@
-apply from: "${rootDir}/buildsystem/module.gradle"
+apply from: "${rootDir}/buildsystem/library.gradle"
 
 dependencies {
     implementation project(":core:core")

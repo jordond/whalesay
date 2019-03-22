@@ -1,4 +1,4 @@
-apply from: "${rootDir}/buildsystem/module.gradle"
+apply from: "${rootDir}/buildsystem/library.gradle"
 
 def secretsPropertiesFile = rootProject.file("secrets.properties")
 def secretsProperties = new Properties()
@@ -14,9 +14,9 @@ dependencies {
     implementation project(":core:core")
 
     /* Network */
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$networkRetrofitCoroutines"
-    implementation "com.squareup.moshi:moshi:$networkMoshi"
-    implementation "com.squareup.okhttp3:logging-interceptor:$networkOkhttp"
-    implementation "se.ansman.kotshi:api:$networkKotshi"
-    kapt "se.ansman.kotshi:compiler:$networkKotshi"
+    implementation(Libs.retrofit2_kotlin_coroutines_adapter)
+    implementation(Libs.moshi)
+    implementation(Libs.logging_interceptor)
+    implementation(Libs.api)
+    kapt(Libs.se_ansman_kotshi_compiler)
 }

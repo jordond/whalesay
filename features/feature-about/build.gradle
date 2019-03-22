@@ -14,7 +14,7 @@ dependencies {
     implementation project(":core:core-ktx")
 
     /* Misc */
-    implementation "com.google.android.gms:play-services-oss-licenses:$pluginOSSLicenseImpl"
+    implementation(Libs.play_services_oss_licenses)
 }
 
 static def getGitHash() {
