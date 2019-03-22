@@ -59,8 +59,7 @@ buildscript {
 
         // UI
         uiGroupie = '2.3.0'
-        uiEiffel = 'd704f2eb6d'
-        uiEiffelAddon = "1.1.2"
+        uiEiffel = 'master-SNAPSHOT'
 
         // Misc
         miscQuickPermissions = '0.4.0'

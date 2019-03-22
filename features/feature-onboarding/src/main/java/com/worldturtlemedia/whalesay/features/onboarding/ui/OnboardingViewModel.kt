@@ -1,7 +1,6 @@
 package com.worldturtlemedia.whalesay.features.onboarding.ui
 
-import com.etiennelenhart.eiffel.interception.Interception
-import com.etiennelenhart.eiffel.interception.pipe
+import com.etiennelenhart.eiffel.interception.interceptions
 import com.etiennelenhart.eiffel.state.Action
 import com.etiennelenhart.eiffel.state.State
 import com.etiennelenhart.eiffel.state.ViewEvent
@@ -35,19 +34,17 @@ sealed class OnboardingAction : Action {
     data class DispatchEvent(val event: OnboardingEvents) : OnboardingAction()
 }
 
-private fun onNavigateUpdatePrefs(prefs: Prefs) = pipe<OnboardingState, OnboardingAction> { _, action ->
-    if (action is DispatchEvent && action.event is OnboardingEvents.NavigateHome) {
-        prefs.hasSeenOnboarding = true
-    }
-}
-
 class OnboardingViewModel @Inject constructor(
     prefs: Prefs
 ) : EiffelViewModel<OnboardingState, OnboardingAction>(OnboardingState()) {
 
-    override val interceptions: List<Interception<OnboardingState, OnboardingAction>> = listOf(
-        onNavigateUpdatePrefs(prefs)
-    )
+    override val interceptions = interceptions<OnboardingState, OnboardingAction> {
+        on<DispatchEvent> {
+            pipe { _, _ ->
+                prefs.hasSeenOnboarding = true
+            }
+        }
+    }
 
     override val update = update<OnboardingState, OnboardingAction> { action ->
         when (action) {
