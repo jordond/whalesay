@@ -11,13 +11,12 @@
     <img alt="CircleCI Develop" src="https://img.shields.io/circleci/project/github/worldturtlemedia/whalesay/develop.svg">
   </a>
 </p>
-<p align="center">
-  <a href="https://waffle.io/worldturtlemedia/whalesay">
-    <img alt="Waffle.io" src="https://badge.waffle.io/worldturtlemedia/whalesay.svg?columns=all">
-  </a>
-</p>
 
 **WhaleSay** is a app for translating English text or speech into the Whale language "Whalese".  Visit [whalesay](https://whalesay.ca) for more information!
+
+## Note:
+
+This project is currently on **hold**, as my limited spare time is being used to develop [CycleCheck](https://github.com/cyclecheck/).  Which unlike this project, I will actively use in my day to day life.
 
 ## Highlights
 
