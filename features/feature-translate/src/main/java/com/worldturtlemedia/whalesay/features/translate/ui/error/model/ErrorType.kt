@@ -11,4 +11,5 @@ open class ErrorType : Parcelable {
     object Google : ErrorType()
     object SpeechToText : ErrorType()
     object TextToSpeech : ErrorType()
+    object AudioPlayer : ErrorType()
 }

@@ -1,9 +1,11 @@
 package com.worldturtlemedia.whalesay.features.about.ui
 
 import androidx.annotation.StringRes
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.worldturtlemedia.whalesay.core.ktx.launchViewIntent
 import com.worldturtlemedia.whalesay.core.ktx.onClick
 import com.worldturtlemedia.whalesay.core.ktx.showMessage
+import com.worldturtlemedia.whalesay.core.ktx.startActivity
 import com.worldturtlemedia.whalesay.core.ktx.util.openRateApp
 import com.worldturtlemedia.whalesay.core.view.fragment.BindableFragment
 import com.worldturtlemedia.whalesay.core.view.util.ktx.launchChromeTab
@@ -26,11 +28,10 @@ internal class AboutFragment : BindableFragment<FragmentAboutBinding>() {
         btnViewWebsite.onClick { launchChromeTab(R.string.app_url) }
         btnSource.onClick { launchChromeTab(R.string.git_url) }
 
-        btnInspiredBy.onClick {
-            requireContext().launchViewIntent("http://${getString(R.string.inspired_by_url)}")
-        }
-
+        btnInspiredBy.onClick { launchViewIntent("http://${getString(R.string.inspired_by_url)}") }
         btnRate.onClick { openRateApp(requireContext()) }
+        btnOpenSourceLicenses.onClick { startActivity<OssLicensesMenuActivity>() }
+
         btnShare.onClick { binding.root.showMessage("Coming soon!") }
     }
 

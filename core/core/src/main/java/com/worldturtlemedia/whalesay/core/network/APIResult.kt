@@ -39,3 +39,7 @@ val APIResult.Error.isClientError: Boolean
 
 val APIResult.Error.isServerError: Boolean
     get() = response?.code()?.let { HttpCode.isServerError(it) } ?: false
+
+fun <T> T.asAPIResultSuccess() = APIResult.Success(this)
+
+fun Throwable.asAPIResultError() = APIResult.Error(this)

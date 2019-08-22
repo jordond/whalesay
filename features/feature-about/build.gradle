@@ -12,6 +12,9 @@ dependencies {
     implementation project(":core:core")
     implementation project(":core:core-view")
     implementation project(":core:core-ktx")
+
+    /* Misc */
+    implementation(Libs.play_services_oss_licenses)
 }
 
 static def getGitHash() {

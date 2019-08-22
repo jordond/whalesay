@@ -4,6 +4,8 @@ import com.etiennelenhart.eiffel.Eiffel
 import com.etiennelenhart.eiffel.logger.logger
 import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
+import com.worldturtlemedia.whalesay.data.db.prefs.Prefs
+import com.worldturtlemedia.whalesay.data.db.prefs.setDebugVoiceSettings
 import timber.log.Timber
 
 class DebugMainApplication : MainApplication() {
@@ -13,6 +15,8 @@ class DebugMainApplication : MainApplication() {
 
         setupLeakCanary()
         setupStetho()
+
+        Prefs.setDebugVoiceSettings()
     }
 
     override fun setupTimber() {

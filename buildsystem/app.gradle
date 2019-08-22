@@ -76,79 +76,79 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     /* Kotlin */
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines"
+    implementation(Libs.kotlin_stdlib_jdk7)
+    implementation(Libs.kotlinx_coroutines_core)
+    implementation(Libs.kotlinx_coroutines_android)
 
     /* Architecture components */
-    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycle"
-    implementation "android.arch.navigation:navigation-fragment-ktx:$archNavigation"
-    implementation "android.arch.navigation:navigation-ui-ktx:$archNavigation"
+    implementation(Libs.lifecycle_extensions)
+    implementation(Libs.navigation_fragment_ktx)
+    implementation(Libs.navigation_ui_ktx)
 
     /* Android libraries */
-    implementation "androidx.constraintlayout:constraintlayout:$androidConstraintLayout"
-    implementation "androidx.legacy:legacy-support-v4:$androidLegacy"
-    implementation "androidx.appcompat:appcompat:$androidAppcompat"
-    implementation "com.google.android.material:material:$androidMaterial"
+    implementation(Libs.constraintlayout)
+    implementation(Libs.legacy_support_v4)
+    implementation(Libs.appcompat)
+    implementation(Libs.material)
 
     /* Ktx */
-    implementation "androidx.core:core-ktx:$ktxCore"
-    implementation "com.shopify:livedata-ktx:$ktxLiveData"
-    implementation "com.snakydesign.livedataextensions:lives:$ktxLives"
-    implementation "com.github.ajalt:timberkt:$ktxTimber"
+    implementation(Libs.core_ktx)
+    implementation(Libs.livedata_ktx)
+    implementation(Libs.lives)
+    implementation(Libs.timberkt)
 
     /* Dependency Injection */
-    implementation "com.google.dagger:dagger:$diDagger"
-    implementation "com.google.dagger:dagger-android:$diDagger"
-    implementation "com.google.dagger:dagger-android-support:$diDagger"
-    kapt "com.google.dagger:dagger-compiler:$diDagger"
-    kapt "com.google.dagger:dagger-android-processor:$diDagger"
+    implementation(Libs.dagger)
+    implementation(Libs.dagger_android)
+    implementation(Libs.dagger_android_support)
+    kapt(Libs.dagger_compiler)
+    kapt(Libs.dagger_android_processor)
 
     /* Shared Preferences */
-    implementation "com.chibatching.kotpref:kotpref:$prefsKotpref"
-    implementation "com.chibatching.kotpref:initializer:$prefsKotpref"
+    implementation(Libs.kotpref)
+    implementation(Libs.initializer)
 
     /* UI */
-    implementation "$uiEiffelUrl:$uiEiffel"
-    implementation "com.xwray:groupie:$uiGroupie"
-    implementation "com.xwray:groupie-databinding:$uiGroupie"
-    implementation "com.xwray:groupie-kotlin-android-extensions:$uiGroupie"
+    implementation(Libs.eiffel)
+    implementation(Libs.groupie)
+    implementation(Libs.groupie_databinding)
+    implementation(Libs.groupie_kotlin_android_extensions)
 
     /* Network */
-    implementation "com.squareup.retrofit2:retrofit:$networkRetrofit"
-    implementation "com.squareup.moshi:moshi:$networkMoshi"
+    implementation(Libs.retrofit)
+    implementation(Libs.moshi)
 
     /* Misc */
-    implementation "joda-time:joda-time:$miscJodaTime"
-    implementation "com.github.quickpermissions:quickpermissions-kotlin:$miscQuickPermissions"
+    implementation(Libs.joda_time)
+    implementation(Libs.quickpermissions_kotlin)
 
     /* Debug Utils */
-    implementation "com.jakewharton.timber:timber:$debugTimber"
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$debugLeakCanary"
-    debugImplementation "com.facebook.stetho:stetho:$debugStetho"
-    debugImplementation "com.facebook.stetho:stetho-okhttp3:$debugStetho"
+    implementation(Libs.timber)
+    debugImplementation(Libs.leakcanary_android)
+    debugImplementation(Libs.stetho)
+    debugImplementation(Libs.stetho_okhttp3)
 
     /* Hyperion */
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-core:$debugHyperion"
-    releaseImplementation "com.willowtreeapps.hyperion:hyperion-core-no-op:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-attr:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-measurement:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-disk:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-recorder:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-phoenix:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-crash:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-shared-preferences:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-geiger-counter:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-timber:$debugHyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-build-config:$debugHyperion"
+    debugImplementation(Libs.hyperion_core)
+    releaseImplementation(Libs.hyperion_core_no_op)
+    debugImplementation(Libs.hyperion_attr)
+    debugImplementation(Libs.hyperion_measurement)
+    debugImplementation(Libs.hyperion_disk)
+    debugImplementation(Libs.hyperion_recorder)
+    debugImplementation(Libs.hyperion_phoenix)
+    debugImplementation(Libs.hyperion_crash)
+    debugImplementation(Libs.hyperion_shared_preferences)
+    debugImplementation(Libs.hyperion_geiger_counter)
+    debugImplementation(Libs.hyperion_timber)
+    debugImplementation(Libs.hyperion_build_config)
 
     /* Testing */
-    testImplementation "junit:junit:$testJunit"
-    testImplementation "androidx.arch.core:core-testing:$testAndroidArch"
-    testImplementation "io.mockk:mockk:$testMockk"
-    testImplementation "com.willowtreeapps.assertk:assertk:$testAssertK"
-    testImplementation "org.robolectric:robolectric:$testRobolectric"
-    androidTestImplementation "androidx.test:runner:$testAndroidRunner"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$testEspresso"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$testEspresso"
+    testImplementation(Libs.junit)
+    testImplementation(Libs.core_testing)
+    testImplementation(Libs.mockk)
+    testImplementation(Libs.assertk)
+    testImplementation(Libs.robolectric)
+    androidTestImplementation(Libs.androidx_test_runner)
+    androidTestImplementation(Libs.espresso_core)
+    androidTestImplementation(Libs.espresso_contrib)
 }

@@ -10,12 +10,6 @@ jobs:
           GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx1536m -XX:+HeapDumpOnOutOfMemoryError"'
     steps:
       - checkout
-      - run:
-          name: Setup bash
-          command: echo "source $(git rev-parse --show-toplevel)/.circleci/bash.source" >> $BASH_ENV
-      - run:
-          name: Check ENV
-          command: echo "Is Release - $is_on_master_or_release"
       - restore_cache:
           key: sdks-licenses-build-tools-extras-{{ checksum "build.gradle" }}-{{ checksum "mobile/build.gradle" }}
       - restore_cache:
@@ -29,42 +23,42 @@ jobs:
       - save_cache:
           key: sdks-licenses-build-tools-extras-{{ checksum "build.gradle" }}-{{ checksum "mobile/build.gradle" }}
           paths:
-          - /opt/android/sdk/licenses
-          - /opt/android/sdk/build-tools
-          - /opt/android/sdk/extras
+            - /opt/android/sdk/licenses
+            - /opt/android/sdk/build-tools
+            - /opt/android/sdk/extras
       - save_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "mobile/build.gradle" }}
           paths:
-          - ~/.gradle
+            - ~/.gradle
       - run:
           name: Signing Report
           command: ./gradlew signingReport
       - run:
           name: Check
           command: |
-              if [ $CIRCLE_BRANCH = 'master' ] || [ $CIRCLE_BRANCH = 'develop' ]; then
-                  ./gradlew --stacktrace ktlintCheck
-              fi
+            if [ $CIRCLE_BRANCH = 'master' ] || [ $CIRCLE_BRANCH = 'develop' ]; then
+                ./gradlew --stacktrace ktlintCheck
+            fi
       - run:
           name: Test
           command: |
-              if [ $CIRCLE_BRANCH = 'master' ] || [ $CIRCLE_BRANCH = 'develop' ]; then
-                  ./gradlew --stacktrace testRelease
-              else
-                  ./gradlew --stacktrace testDebug
-              fi
+            if [ $CIRCLE_BRANCH = 'master' ] || [ $CIRCLE_BRANCH = 'develop' ]; then
+                ./gradlew --stacktrace testRelease
+            else
+                ./gradlew --stacktrace testDebug
+            fi
       - run:
           name: Build
           command: |
-              if [ $CIRCLE_BRANCH = 'master' ];  then
-                  ./gradlew assembleRelease
-                  ./gradlew bundleRelease
-              elif [ $CIRCLE_BRANCH = 'develop' ]; then
-                  ./gradlew assembleBeta
-                  ./gradlew bundleBeta
-              else
-                  ./gradlew assembleDebug
-              fi
+            if [ $CIRCLE_BRANCH = 'master' ];  then
+                ./gradlew assembleRelease
+                ./gradlew bundleRelease
+            elif [ $CIRCLE_BRANCH = 'develop' ]; then
+                ./gradlew assembleBeta
+                ./gradlew bundleBeta
+            else
+                ./gradlew assembleDebug
+            fi
       - store_artifacts:
           path: mobile/build/reports
           destination: reports

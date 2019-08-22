@@ -8,6 +8,6 @@ import retrofit2.http.POST
 
 interface SpeechToTextService {
 
-    @POST("speech:recognize")
+    @POST("./speech:recognize")
     fun recognizeSpeech(@Body body: SpeechToTextRequest): APIResponse<SpeechToTextResponse>
 }

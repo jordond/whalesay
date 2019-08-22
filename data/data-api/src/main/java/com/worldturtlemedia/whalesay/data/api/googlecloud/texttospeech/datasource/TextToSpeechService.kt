@@ -18,6 +18,6 @@ interface TextToSpeechService {
      *
      * @param[body] Text-to-speech options
      */
-    @POST("text:synthesize")
+    @POST("./text:synthesize")
     fun convertTextToSpeech(@Body body: TextToSpeechRequest): APIResponse<TextToSpeechResponse>
 }

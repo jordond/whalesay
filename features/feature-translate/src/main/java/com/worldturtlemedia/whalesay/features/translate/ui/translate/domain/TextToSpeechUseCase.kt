@@ -1,12 +1,14 @@
 package com.worldturtlemedia.whalesay.features.translate.ui.translate.domain
 
 import android.content.Context
+import com.github.ajalt.timberkt.e
 import com.worldturtlemedia.whalesay.core.ktx.hasNoInternet
 import com.worldturtlemedia.whalesay.core.network.APIResult
 import com.worldturtlemedia.whalesay.core.network.isClientError
 import com.worldturtlemedia.whalesay.core.network.isServerError
 import com.worldturtlemedia.whalesay.data.repository.TextToSpeechRepository
 import com.worldturtlemedia.whalesay.features.translate.ui.error.model.ErrorType
+import java.io.File
 import javax.inject.Inject
 
 class TextToSpeechUseCase @Inject constructor(
@@ -22,14 +24,15 @@ class TextToSpeechUseCase @Inject constructor(
      * @throws TextToSpeechException
      */
     @Throws
-    suspend fun translateText(text: String): String {
+    suspend fun translateText(text: String): File {
         if (context.hasNoInternet()) throw TextToSpeechException(ErrorType.Network)
 
         val result = textToSpeechRepository.translateTextToSpeech(text)
 
         return when (result) {
-            is APIResult.Success -> result.data.audioContent
+            is APIResult.Success -> result.data
             is APIResult.Error -> {
+                e(result.exception) { "Unable to convert text to speech!" }
                 throw TextToSpeechException(
                     when {
                         result.isClientError -> ErrorType.TextToSpeech
